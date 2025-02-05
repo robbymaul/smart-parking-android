@@ -1,6 +1,5 @@
 package com.dev.smartparking.ui.component
 
-import android.graphics.drawable.Icon
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
