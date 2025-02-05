@@ -1,6 +1,7 @@
 package com.dev.smartparking.ui.component
 
 import android.graphics.drawable.Icon
+import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -20,26 +21,30 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.dev.smartparking.R
 import com.dev.smartparking.ui.theme.SmartParkingTheme
 
 @Composable
 fun ButtonComponent(
     modifier: Modifier = Modifier,
     onClick: () -> Unit,
-    text: String = "",
+    @StringRes text: Int,
     icon:@Composable  (()-> Unit)? = null,
     cornerRadius: Dp = 8.dp,
     color: Color,
-    textColor: Color
+    textColor: Color,
+    textSize: TextUnit = 16.sp
 ) {
     Button (
-        modifier = modifier.padding(8.dp),
+        modifier = modifier,
         onClick = onClick,
         shape = RoundedCornerShape(cornerRadius),
         colors = ButtonDefaults.buttonColors(
@@ -51,9 +56,9 @@ fun ButtonComponent(
             icon()
         } else {
             Text(
-                text = text,
+                text = stringResource(text),
                 style = TextStyle(
-                    fontSize = 22.sp,
+                    fontSize = textSize,
                     fontWeight = FontWeight.SemiBold
                 )
             )
@@ -67,7 +72,7 @@ fun ButtonComponent(
 private fun ButtonComponentPreview() {
     SmartParkingTheme {
         ButtonComponent(
-            text = "Register",
+            text = R.string.button_book_now,
             color = MaterialTheme.colorScheme.primary,
             textColor = MaterialTheme.colorScheme.background,
             onClick = {},
