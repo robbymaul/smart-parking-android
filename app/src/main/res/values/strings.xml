@@ -1,4 +1,58 @@
 <resources>
-    <string name="app_name">SmartParking</string>
-    <string name="button_book_now">Book Now</string>
+    <!-- APPLICATION -->
+    <string name="app_name">Smart Parking</string>
+    <string name="dot">.</string>
+
+    <!-- TEXT BUTTON -->
+    <string name="txt_button_book_now">Book Now</string>
+    <string name="txt_button_register">Register</string>
+    <string name="txt_button_login1">Login</string>
+    <string name="txt_button_verify_otp">Verify</string>
+    <string name="txt_button_get_started">Get Started</string>
+    <string name="txt_button_submit">Submit</string>
+
+    <!-- TEXT TITLE -->
+    <string name="txt_title_field_phone_number1">Phone Number</string>
+    <string name="txt_title_field_password1">Password</string>
+    <string name="txt_title_field_name1">Name</string>
+    <string name="txt_title_field_phone_number">Phone Number</string>
+    <string name="txt_title_field_confirm_password">Confirm Password</string>
+    <string name="txt_title_section_categories">Categories</string>
+    <string name="txt_title_recommendation">Recommendation For You</string>
+
+    <!-- TEXT DESC -->
+    <string name="desc_field_password">*minimum 6 length inclusion of uppercase and lowercase, numbers</string>
+    <string name="desc_screen_login">Enter your details below or continue with your social account to Smart Parking</string>
+    <string name="desc_screen_register">Enter your details below or continue with your social account to Smart Parking</string>
+    <string name="desc_screen_otp">Please enter the code we just sent to your Phone Number</string>
+    <string name="desc_screen_activation">Please enter your Valid Vehicle Number (STNK)</string>
+    <string name="desc_screen_easy_parking">Quickly find and book parking spots near your destination. Parking made simple.</string>
+    <string name="desc_screen_book_anytime_anywhere">Reserve parking when you need it.</string>
+    <string name="desc_screen_safe_and_secure">Park with confidence at trusted locations, designed to keep your vehicle safe.</string>
+    <string name="desc_screen_forgot_password">No worries, we’ll send you reset instructions.</string>
+    <string name="desc_screen_set_new_password">Must be at least 6 characters, inclusion of uppercase and lowercase letters, numbers, and special characters.</string>
+
+    <!-- TEXT TITLE SCREEN -->
+    <string name="title_screen_login">Login Account</string>
+    <string name="title_screen_register">Create Account</string>
+    <string name="title_screen_otp">Verify OTP</string>
+    <string name="title_screen_activation">STNK Activation</string>
+    <string name="title_screen_easy_parking">Easy Parking</string>
+    <string name="title_screen_book_anytime_anywhere">Book Anytime, Anywhere</string>
+    <string name="title_screen_safe_and_secure">Safe and Secure</string>
+    <string name="title_screen_forgot_password">Forgot Password?</string>
+    <string name="title_screen_set_new_password">Set New Password</string>
+
+    <!-- TEXT -->
+    <string name="txt_have_and_account">Have an Account?</string>
+    <string name="txt_login">Login</string>
+    <string name="txt_create_account1">Create Account!</string>
+    <string name="txt_not_register1">Not Registered Yet?</string>
+    <string name="txt_forgot_password1">Forgot Password</string>
+
+    <!-- TEXT PLACEHOLDER-->
+    <string name="txt_place_holder_form_phone_number">08676684363573</string>
+    <string name="txt_place_holder_form_password">********</string>
+    <string name="txt_place_holder_form_name">Robby Maulana</string>
+    <string name="txt_place_holder_vehicle_number">Vehicle Number</string>
 </resources>

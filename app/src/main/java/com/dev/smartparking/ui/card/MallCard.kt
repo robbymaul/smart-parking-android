@@ -100,7 +100,7 @@ fun MallCard(
                     modifier = Modifier.width(144.dp).height(32.13.dp),
                     onClick = {},
                     cornerRadius = 24.dp,
-                    text = R.string.button_book_now,
+                    text = R.string.txt_button_book_now,
                     color = MaterialTheme.colorScheme.primary,
                     textColor = MaterialTheme.colorScheme.background,
                 )

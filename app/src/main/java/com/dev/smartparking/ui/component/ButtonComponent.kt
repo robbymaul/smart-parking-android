@@ -25,7 +25,7 @@ import com.dev.smartparking.ui.theme.SmartParkingTheme
 fun ButtonComponent(
     modifier: Modifier = Modifier,
     onClick: () -> Unit,
-    @StringRes text: Int,
+    @StringRes text: Int = R.string.dot,
     icon:@Composable  (()-> Unit)? = null,
     cornerRadius: Dp = 8.dp,
     color: Color,
@@ -61,7 +61,7 @@ fun ButtonComponent(
 private fun ButtonComponentPreview() {
     SmartParkingTheme {
         ButtonComponent(
-            text = R.string.button_book_now,
+            text = R.string.txt_button_book_now,
             color = MaterialTheme.colorScheme.primary,
             textColor = MaterialTheme.colorScheme.background,
             onClick = {},

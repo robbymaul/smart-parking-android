@@ -38,7 +38,7 @@ fun TextFieldOtpElement(
             fontSize = 12.sp,
             color = MaterialTheme.colorScheme.primary
         ),
-        shape = RoundedCornerShape(8.dp).copy(),
+        shape = RoundedCornerShape(8.dp),
         value = value,
         onValueChange = {newValue ->
             if (newValue.length <= 1 && newValue.all {  it.isDigit() }) {
