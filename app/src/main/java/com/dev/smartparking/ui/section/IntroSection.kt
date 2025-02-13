@@ -16,6 +16,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -27,19 +28,20 @@ import com.dev.smartparking.ui.theme.SmartParkingTheme
 fun IntroSection(
     modifier: Modifier = Modifier,
     @StringRes title: Int,
-    @StringRes description: Int
+    @StringRes description: Int,
+    intro: Boolean = false
 ) {
     Column (
         modifier = modifier.padding(horizontal = 16.dp, vertical = 8.dp ),
         verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.Start
+         horizontalAlignment = if (intro) Alignment.Start  else Alignment.CenterHorizontally
     ) {
         Text(
             text = stringResource(title),
             modifier = Modifier.paddingFromBaseline(top = 48.dp, bottom = 16.dp),
             style = TextStyle(
                 fontWeight = FontWeight.Bold,
-            fontSize = 30.sp
+                fontSize = 30.sp,
             )
         )
         Text(
@@ -47,7 +49,8 @@ fun IntroSection(
             style = TextStyle(
                 fontWeight = FontWeight.Normal,
                 fontSize = 15.sp,
-                color = MaterialTheme.colorScheme.secondary,
+                color = MaterialTheme.colorScheme.secondary.copy(alpha = 0.8f),
+                textAlign = if (intro) TextAlign.Justify else TextAlign.Center
             )
         )
     }

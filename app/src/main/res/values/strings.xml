@@ -22,6 +22,7 @@
 
     <!-- TEXT DESC -->
     <string name="desc_field_password">*minimum 6 length inclusion of uppercase and lowercase, numbers</string>
+    <string name="desc_field_forgot_password_phone_number">Please enter your Valid Phone Number</string>
     <string name="desc_screen_login">Enter your details below or continue with your social account to Smart Parking</string>
     <string name="desc_screen_register">Enter your details below or continue with your social account to Smart Parking</string>
     <string name="desc_screen_otp">Please enter the code we just sent to your Phone Number</string>
@@ -49,10 +50,11 @@
     <string name="txt_create_account1">Create Account!</string>
     <string name="txt_not_register1">Not Registered Yet?</string>
     <string name="txt_forgot_password1">Forgot Password</string>
+    <string name="txt_or_signup1">Or Signup With</string>
 
     <!-- TEXT PLACEHOLDER-->
     <string name="txt_place_holder_form_phone_number">08676684363573</string>
     <string name="txt_place_holder_form_password">********</string>
-    <string name="txt_place_holder_form_name">Robby Maulana</string>
+    <string name="txt_place_holder_form_name">Full Name</string>
     <string name="txt_place_holder_vehicle_number">Vehicle Number</string>
 </resources>

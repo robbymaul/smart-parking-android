@@ -101,7 +101,6 @@ fun MallCard(
                     onClick = {},
                     cornerRadius = 24.dp,
                     text = R.string.txt_button_book_now,
-                    color = MaterialTheme.colorScheme.primary,
                     textColor = MaterialTheme.colorScheme.background,
                 )
                 RatingComponent(

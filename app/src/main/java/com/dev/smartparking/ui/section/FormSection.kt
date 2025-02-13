@@ -44,7 +44,7 @@ fun SectionFormField(
             stringResource(title),
             style = textStyle,
             modifier = Modifier
-                .paddingFromBaseline(top = 40.dp, bottom = 4.dp)
+                .paddingFromBaseline(top = 32.dp, bottom = 4.dp)
                 .padding(horizontal = 8.dp)
         )
         content()

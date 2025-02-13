@@ -58,7 +58,7 @@ fun FormTextFieldElement(
                     textAlign = TextAlign.Start,
                     fontWeight = FontWeight.SemiBold,
                     fontSize = 16.sp,
-                    color = MaterialTheme.colorScheme.primary.copy(alpha = 0.5f),
+                    color = MaterialTheme.colorScheme.secondary.copy(alpha = 0.5f),
 
                 )
             )
@@ -68,7 +68,7 @@ fun FormTextFieldElement(
             textAlign = TextAlign.Start,
             fontWeight = FontWeight.SemiBold,
             fontSize = 16.sp,
-            color = MaterialTheme.colorScheme.primary
+            color = MaterialTheme.colorScheme.secondary
         ),
         visualTransformation = visualTransformation,
         trailingIcon = trailingIcon,

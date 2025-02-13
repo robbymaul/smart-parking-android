@@ -35,7 +35,7 @@ fun TextFieldOtpElement(
         textStyle = TextStyle(
             textAlign = TextAlign.Center,
             fontWeight = FontWeight.Bold,
-            fontSize = 12.sp,
+            fontSize = 16.sp,
             color = MaterialTheme.colorScheme.primary
         ),
         shape = RoundedCornerShape(8.dp),

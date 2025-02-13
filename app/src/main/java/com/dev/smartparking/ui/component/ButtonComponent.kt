@@ -28,7 +28,6 @@ fun ButtonComponent(
     @StringRes text: Int = R.string.dot,
     icon:@Composable  (()-> Unit)? = null,
     cornerRadius: Dp = 8.dp,
-    color: Color,
     textColor: Color,
     textSize: TextUnit = 16.sp
 ) {
@@ -37,7 +36,7 @@ fun ButtonComponent(
         onClick = onClick,
         shape = RoundedCornerShape(cornerRadius),
         colors = ButtonDefaults.buttonColors(
-            containerColor = color,
+            containerColor = MaterialTheme.colorScheme.primary,
             contentColor = textColor
         )
     ) {
@@ -62,7 +61,6 @@ private fun ButtonComponentPreview() {
     SmartParkingTheme {
         ButtonComponent(
             text = R.string.txt_button_book_now,
-            color = MaterialTheme.colorScheme.primary,
             textColor = MaterialTheme.colorScheme.background,
             onClick = {},
 //            icon = {
