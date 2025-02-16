@@ -51,6 +51,7 @@
     <string name="txt_not_register1">Not Registered Yet?</string>
     <string name="txt_forgot_password1">Forgot Password</string>
     <string name="txt_or_signup1">Or Signup With</string>
+    <string name="txt_mall1">Mall</string>
 
     <!-- TEXT PLACEHOLDER-->
     <string name="txt_place_holder_form_phone_number">08676684363573</string>

@@ -38,7 +38,9 @@ fun IntroActivity(modifier: Modifier = Modifier) {
     val coroutineScope = rememberCoroutineScope()
     val listScreen: List<IntroScreenData> = IntroScreenProvider.getIntroScreens()
 
-    Column {
+    Column (
+        modifier = modifier
+    ){
         HorizontalPager(
             count = listScreen.size,
             state = pagerState,
