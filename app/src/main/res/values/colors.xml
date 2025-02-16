@@ -9,4 +9,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="grey">#333333</color>
     <color name="bg_primary">#246BFD</color>
+    <color name="bg_notification_unread">#246BFD</color>
 </resources>
