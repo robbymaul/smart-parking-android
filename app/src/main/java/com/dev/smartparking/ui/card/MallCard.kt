@@ -6,12 +6,14 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Card
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -42,74 +44,77 @@ fun MallCard(
     mallName: String,
     isLike: Boolean
 ) {
-    Box (
-        modifier = modifier.width(347.dp)
+    Card(
+        shape = RoundedCornerShape(8.dp),
+        elevation = 6.dp, // Tambahkan shadow
+        modifier = modifier
+            .width(347.dp)
             .height(153.dp)
-            .clip(
-                RoundedCornerShape(
-                    size = 8.dp
-                )
-            ),
-        contentAlignment = Alignment.Center
-    ){
-        AsyncImage(
-            model = imageUrl,
-            contentDescription = descriptionImage,
-            contentScale = ContentScale.Crop,
-            modifier = Modifier.matchParentSize(),
-            error = painterResource(R.drawable.smart_parking_logo1),
-            onSuccess = { Log.d("ImageLoad", "Image loaded successfully") },
-            onError = { Log.e("ImageLoad", "Error loading image: ${it.result.throwable}") }
-        )
-
-        Column (
-            modifier = Modifier.fillMaxWidth()
-                .fillMaxHeight()
-                .padding(
-                    horizontal = 8.dp,
-                    vertical = 6.dp
-                ),
-            verticalArrangement = Arrangement.SpaceBetween
+            .padding(8.dp) // Tambahkan padding agar tidak terlalu mepet dengan elemen lain
+    ) {
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .clip(RoundedCornerShape(8.dp)), // Pastikan gambar terclip mengikuti Card
+            contentAlignment = Alignment.Center
         ) {
-            Row (
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween
-            ){
-                Text(
-                    text = mallName,
-                    fontWeight = FontWeight.Bold,
-                    style = TextStyle(
-                        shadow = Shadow(
-                            blurRadius = 0.5f
-                        )
-                    ),
-                    color = Color.White
-                )
-                FavoriteComponent(
-                    modifier = Modifier.size(32.dp),
-                    onClick = {},
-                    isLike = isLike
-                )
-            }
-            Row (
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.Bottom
-            ){
-                ButtonComponent(
-                    modifier = Modifier.width(144.dp).height(32.13.dp),
-                    onClick = {},
-                    cornerRadius = 24.dp,
-                    text = R.string.txt_button_book_now,
-                    textColor = MaterialTheme.colorScheme.background,
-                )
-                RatingComponent(
-                    rating = rating
-                )
+            AsyncImage(
+                model = imageUrl,
+                contentDescription = descriptionImage,
+                contentScale = ContentScale.Crop,
+                modifier = Modifier.matchParentSize(),
+                error = painterResource(R.drawable.smart_parking_logo1),
+                onSuccess = { Log.d("ImageLoad", "Image loaded successfully") },
+                onError = { Log.e("ImageLoad", "Error loading image: ${it.result.throwable}") }
+            )
+
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(8.dp),
+                verticalArrangement = Arrangement.SpaceBetween
+            ) {
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
+                    Text(
+                        text = mallName,
+                        fontWeight = FontWeight.Bold,
+                        style = TextStyle(
+                            shadow = Shadow(blurRadius = 0.5f)
+                        ),
+                        color = Color.White
+                    )
+                    FavoriteComponent(
+                        modifier = Modifier.size(32.dp),
+                        onClick = {},
+                        isLike = isLike
+                    )
+                }
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.Bottom
+                ) {
+                    ButtonComponent(
+                        modifier = Modifier
+                            .width(144.dp)
+                            .height(32.13.dp),
+                        onClick = {},
+                        cornerRadius = 24.dp,
+                        text = R.string.txt_button_book_now,
+                        textColor = MaterialTheme.colorScheme.background,
+                    )
+                    RatingComponent(
+                        rating = rating
+                    )
+                }
             }
         }
     }
 }
+
 
 @Preview
 @Composable

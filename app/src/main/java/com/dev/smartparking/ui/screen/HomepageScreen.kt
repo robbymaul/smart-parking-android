@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
@@ -38,12 +39,16 @@ fun HomepageScreen(modifier: Modifier = Modifier) {
         ContentSection(
             title = R.string.txt_title_recommendation
         ) {
-            MallCard(
-                imageUrl = "https://res.cloudinary.com/dxdtxld4f/image/upload/v1738768682/skripsi/image_mall1_ixzb6u.jpg",
-                rating = "4.5",
-                mallName = "Margonda City Mall",
-                isLike = true
-            )
+            LazyRow {
+                items( count = 7) {
+                    MallCard(
+                        imageUrl = "https://res.cloudinary.com/dxdtxld4f/image/upload/v1738768682/skripsi/image_mall1_ixzb6u.jpg",
+                        rating = "4.5",
+                        mallName = "Margonda City Mall",
+                        isLike = true
+                    )
+                }
+            }
         }
     }
 }

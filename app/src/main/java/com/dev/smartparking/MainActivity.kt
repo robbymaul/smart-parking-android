@@ -34,6 +34,7 @@ import com.dev.smartparking.ui.element.FormTextFieldElement
 import com.dev.smartparking.ui.screen.ForgotPasswordScreen
 import com.dev.smartparking.ui.screen.HomepageScreen
 import com.dev.smartparking.ui.screen.NotificationScreen
+import com.dev.smartparking.ui.screen.ProfileScreen
 import com.dev.smartparking.ui.screen.ResetPasswordScreen
 import com.dev.smartparking.ui.screen.Splash
 import com.dev.smartparking.ui.screen.StnkActivationScreen
@@ -51,58 +52,62 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     topBar = { TopBarMenuHomepageComponent() }
                 ) { innerPadding ->
-//                    MallCard(
-//                        modifier = Modifier.padding(innerPadding),
-//                        imageUrl = "https://res.cloudinary.com/dxdtxld4f/image/upload/v1738768682/skripsi/image_mall1_ixzb6u.jp",
-//                        mallName = "Margonda City Mall",
-//                        rating = "4.5",
-//                        isLike = false
-//                    )
-
-//                    Splash(modifier = Modifier.padding(innerPadding))
-//                    SectionFormField(
-//                        modifier = Modifier.padding(paddingValues = innerPadding),
-//                        title = R.string.txt_title_field_password1,
-//                        textStyle = MaterialTheme.typography.titleSmall.copy(
-//                            fontSize = 12.sp
-//                        )
-//                    ) {
-//                        var passwordVisible by remember { mutableStateOf(false) }
+////                    MallCard(
+////                        modifier = Modifier.padding(innerPadding),
+////                        imageUrl = "https://res.cloudinary.com/dxdtxld4f/image/upload/v1738768682/skripsi/image_mall1_ixzb6u.jp",
+////                        mallName = "Margonda City Mall",
+////                        rating = "4.5",
+////                        isLike = false
+////                    )
 //
-//                        FormTextFieldElement(
-//                            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
-//                            placeHolder = R.string.txt_place_holder_form_password,
-//                            value = "asdasdasd",
-//                            onValueChange = {},
-//                            visualTransformation = if (passwordVisible) VisualTransformation.None else PasswordVisualTransformation(),
-//                            trailingIcon = {
-//                                val image = if (passwordVisible) Icons.Default.Visibility else Icons.Filled.VisibilityOff
-//                                IconButton(onClick = { passwordVisible = !passwordVisible }) {
-//                                    Icon(
-//                                        imageVector = image,
-//                                        contentDescription = "Toggle Password Visibility"
-//                                    )
-//                                }
-//                            }
-//                        )
-//                    }
-//                    IntroActivity(modifier = Modifier.padding(innerPadding))
-//                    LoginActivity(modifier = Modifier.padding(innerPadding))
-//                    RegisterActivity(modifier =  Modifier.padding(innerPadding))
-//                    StnkActivationScreen(modifier = Modifier.padding(innerPadding))
-//                    ForgotPasswordScreen(
-//                        modifier = Modifier.padding(innerPadding)
-//                    )
-//                    MenuCategoriesComponent(modifier = Modifier.padding(innerPadding))
-//                    ResetPasswordScreen(modifier = Modifier.padding(innerPadding))
-//                    TicketCard(
-//                        modifier = Modifier.padding(innerPadding)
-//                    )
-//                    TicketScreen(
-//                        modifier = Modifier.padding(innerPadding)
-//                    )
-                    NotificationScreen(
-                        modifier = Modifier.padding(innerPadding)
+////                    Splash(modifier = Modifier.padding(innerPadding))
+////                    SectionFormField(
+////                        modifier = Modifier.padding(paddingValues = innerPadding),
+////                        title = R.string.txt_title_field_password1,
+////                        textStyle = MaterialTheme.typography.titleSmall.copy(
+////                            fontSize = 12.sp
+////                        )
+////                    ) {
+////                        var passwordVisible by remember { mutableStateOf(false) }
+////
+////                        FormTextFieldElement(
+////                            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
+////                            placeHolder = R.string.txt_place_holder_form_password,
+////                            value = "asdasdasd",
+////                            onValueChange = {},
+////                            visualTransformation = if (passwordVisible) VisualTransformation.None else PasswordVisualTransformation(),
+////                            trailingIcon = {
+////                                val image = if (passwordVisible) Icons.Default.Visibility else Icons.Filled.VisibilityOff
+////                                IconButton(onClick = { passwordVisible = !passwordVisible }) {
+////                                    Icon(
+////                                        imageVector = image,
+////                                        contentDescription = "Toggle Password Visibility"
+////                                    )
+////                                }
+////                            }
+////                        )
+////                    }
+////                    IntroActivity(modifier = Modifier.padding(innerPadding))
+////                    LoginActivity(modifier = Modifier.padding(innerPadding))
+////                    RegisterActivity(modifier =  Modifier.padding(innerPadding))
+////                    StnkActivationScreen(modifier = Modifier.padding(innerPadding))
+////                    ForgotPasswordScreen(
+////                        modifier = Modifier.padding(innerPadding)
+////                    )
+////                    MenuCategoriesComponent(modifier = Modifier.padding(innerPadding))
+////                    ResetPasswordScreen(modifier = Modifier.padding(innerPadding))
+////                    TicketCard(
+////                        modifier = Modifier.padding(innerPadding)
+////                    )
+////                    TicketScreen(
+////                        modifier = Modifier.padding(innerPadding)
+////                    )
+////                    NotificationScreen(
+////                        modifier = Modifier.padding(innerPadding)
+////                    )
+                    ProfileScreen(
+                        modifier = Modifier
+                            .padding(innerPadding)
                     )
                 }
 

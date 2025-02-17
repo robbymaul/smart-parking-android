@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Card
 import androidx.compose.material.Divider
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -30,48 +31,46 @@ import com.dev.smartparking.ui.theme.SmartParkingTheme
 
 @Composable
 fun NotificationCard(modifier: Modifier = Modifier) {
-    Row (
-        modifier = modifier.fillMaxWidth()
+    Card(
+        shape = RoundedCornerShape(8.dp),
+        elevation = 1.dp,
+        modifier = modifier
+            .fillMaxWidth()
             .padding(8.dp)
-            .heightIn(max = 120.dp)
-            .background(
-                color = colorResource(R.color.bg_notification_unread).copy(alpha = 0.15f),
-                shape = RoundedCornerShape(percent = 8)
-            ),
-        horizontalArrangement = Arrangement.spacedBy(space = 4.dp),
-        verticalAlignment = Alignment.CenterVertically
+        ,
+        contentColor = colorResource(R.color.bg_notification_unread).copy(alpha = 0.15f),
+        backgroundColor = colorResource(R.color.bg_notification_unread).copy(alpha = 0.15f)
     ) {
-        Image(
-            painter = painterResource(R.drawable.image_default_avatar1),
-            contentDescription = "",
+        Row(
             modifier = Modifier
-                .size(80.dp)
-                .clip(CircleShape)
-                .background(Color.LightGray),
-            contentScale = ContentScale.Crop
-        )
-        NotificationSection(
-            modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
-            name = "Robby Maulana",
-            description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. " +
-                    "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. " +
-                    "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. " +
-                    "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. " +
-                    "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. " +
-                    "Curabitur pretium tincidunt lacus. Nulla gravida orci a odio. Nullam varius, turpis et commodo pharetra, " +
-                    "est eros bibendum elit, nec luctus magna felis sollicitudin mauris. Integer in mauris eu nibh euismod gravida. " +
-                    "Duis ac tellus et risus vulputate vehicula. " +
-                    "Donec lobortis risus a elit. Etiam tempor. Ut ullamcorper, ligula eu tempor congue, eros est euismod turpis, id tincidunt sapien risus a quam. " +
-                    "Maecenas fermentum consequat mi. " +
-                    "Donec fermentum. Pellentesque malesuada nulla a mi. " +
-                    "Duis sapien sem, aliquet nec, commodo eget, consequat quis, neque. " +
-                    "Aliquam faucibus, elit ut dictum aliquet, felis nisl adipiscing sapien, sed malesuada diam lacus eget erat. " +
-                    "Cras mollis scelerisque nunc. Nullam arcu. Aliquam consequat. Curabitur augue lorem, dapibus quis, laoreet et, pretium ac, nisi." +
-                    " Aenean magna nisl, mollis quis, molestie eu, feugiat in, orci. In hac habitasse platea dictumst."
-        )
+                .fillMaxWidth()
+                .padding(12.dp)
+                .heightIn(max = 120.dp), // Mengatur tinggi maksimum
+            horizontalArrangement = Arrangement.spacedBy(8.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Image(
+                painter = painterResource(R.drawable.image_default_avatar1),
+                contentDescription = "",
+                modifier = Modifier
+                    .size(80.dp)
+                    .clip(CircleShape)
+                    .background(Color.LightGray),
+                contentScale = ContentScale.Crop
+            )
+            NotificationSection(
+                modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
+                name = "Robby Maulana",
+                description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. " +
+                        "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. " +
+                        "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. " +
+                        "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
+            )
+        }
     }
-    Divider(color = Color.Gray, thickness = 1.dp)
+    Divider(color = Color.Gray, thickness = 1.dp, modifier = Modifier.padding(top = 4.dp))
 }
+
 
 @Preview(showBackground = true)
 @Composable
