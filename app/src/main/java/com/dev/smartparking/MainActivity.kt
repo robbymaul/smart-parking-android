@@ -31,9 +31,11 @@ import com.dev.smartparking.ui.card.TicketCard
 import com.dev.smartparking.ui.component.MenuCategoriesComponent
 import com.dev.smartparking.ui.component.TopBarMenuHomepageComponent
 import com.dev.smartparking.ui.element.FormTextFieldElement
+import com.dev.smartparking.ui.screen.DetailMallScreen
 import com.dev.smartparking.ui.screen.ForgotPasswordScreen
 import com.dev.smartparking.ui.screen.HomepageScreen
 import com.dev.smartparking.ui.screen.NotificationScreen
+import com.dev.smartparking.ui.screen.PaymentScreen
 import com.dev.smartparking.ui.screen.ProfileScreen
 import com.dev.smartparking.ui.screen.ResetPasswordScreen
 import com.dev.smartparking.ui.screen.Splash
@@ -48,10 +50,10 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             SmartParkingTheme {
-                Scaffold(
-                    modifier = Modifier.fillMaxSize(),
-                    topBar = { TopBarMenuHomepageComponent() }
-                ) { innerPadding ->
+//                Scaffold(
+//                    modifier = Modifier.fillMaxSize(),
+//                    topBar = { TopBarMenuHomepageComponent() }
+//                ) { innerPadding ->
 ////                    MallCard(
 ////                        modifier = Modifier.padding(innerPadding),
 ////                        imageUrl = "https://res.cloudinary.com/dxdtxld4f/image/upload/v1738768682/skripsi/image_mall1_ixzb6u.jp",
@@ -105,13 +107,15 @@ class MainActivity : ComponentActivity() {
 ////                    NotificationScreen(
 ////                        modifier = Modifier.padding(innerPadding)
 ////                    )
-                    ProfileScreen(
-                        modifier = Modifier
-                            .padding(innerPadding)
-                    )
-                }
+//                    ProfileScreen(
+//                        modifier = Modifier
+//                            .padding(innerPadding)
+//                    )
+//                }
 
 //                HomepageActivity()
+//                DetailMallScreen()
+                PaymentScreen()
             }
         }
     }

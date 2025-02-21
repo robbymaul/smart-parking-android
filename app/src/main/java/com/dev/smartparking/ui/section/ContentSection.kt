@@ -29,7 +29,7 @@ fun ContentSection(
             stringResource(title),
             style = MaterialTheme.typography.titleMedium,
             modifier = Modifier
-                .paddingFromBaseline(top = 40.dp, bottom = 16.dp)
+                .paddingFromBaseline(top =32.dp, bottom = 8.dp)
         )
         content()
     }

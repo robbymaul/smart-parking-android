@@ -36,7 +36,7 @@ import com.dev.smartparking.ui.theme.SmartParkingTheme
 @Composable
 fun TopBarMenuHomepageComponent(modifier: Modifier = Modifier) {
     TopAppBar(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .height(120.dp)
             .clip(shape = RoundedCornerShape(bottomEnd = 16.dp, bottomStart = 16.dp)),

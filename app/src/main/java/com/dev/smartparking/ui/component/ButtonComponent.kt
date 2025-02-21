@@ -27,7 +27,7 @@ fun ButtonComponent(
     onClick: () -> Unit,
     @StringRes text: Int = R.string.dot,
     icon:@Composable  (()-> Unit)? = null,
-    cornerRadius: Dp = 8.dp,
+    cornerRadius: Dp = 15.dp,
     textColor: Color,
     textSize: TextUnit = 16.sp
 ) {

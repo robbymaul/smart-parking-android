@@ -52,6 +52,21 @@
     <string name="txt_forgot_password1">Forgot Password</string>
     <string name="txt_or_signup1">Or Signup With</string>
     <string name="txt_mall1">Mall</string>
+    <string name="txt_name">Name</string>
+    <string name="txt_phone">Phone</string>
+    <string name="txt_vehicle">Vehicle</string>
+    <string name="txt_vehicle_number">Vehicle Number</string>
+    <string name="txt_start_time">Start Time</string>
+    <string name="txt_end_time">End Time</string>
+    <string name="txt_location">Location</string>
+    <string name="txt_address">Address</string>
+    <string name="txt_payment_method">Payment Method</string>
+    <string name="txt_admin">Admin</string>
+    <string name="txt_discount">Discount</string>
+    <string name="txt_total">Total</string>
+    <string name="txt_payment">Payment</string>
+    <string name="txt_status">Status</string>
+    <string name="txt_total_charge">Total Charge</string>
 
     <!-- TEXT PLACEHOLDER-->
     <string name="txt_place_holder_form_phone_number">08676684363573</string>
