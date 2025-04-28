@@ -60,9 +60,6 @@ fun LoginScreen(
     navController: NavHostController,
     loginViewModel: LoginViewModel
 ) {
-    var phoneNumber = loginViewModel.phoneNumber
-    var password = loginViewModel.password
-
     Column(
         modifier = modifier
             .fillMaxWidth()
@@ -91,7 +88,7 @@ fun LoginScreen(
                 FormTextFieldElement(
                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
                     placeHolder = stringResource(R.string.txt_place_holder_form_phone_number),
-                    value = phoneNumber,
+                    value = loginViewModel.phoneNumber,
                     onValueChange = { value -> loginViewModel.onPhoneNumberChange(value) },
                     visualTransformation = VisualTransformation.None,
                     trailingIcon = {
@@ -113,7 +110,7 @@ fun LoginScreen(
             FormTextFieldElement(
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
                 placeHolder = stringResource(R.string.txt_place_holder_form_password),
-                value = password,
+                value = loginViewModel.password,
                 onValueChange = { value -> loginViewModel.onPasswordChange(value) },
                 visualTransformation = if (passwordVisible) VisualTransformation.None else PasswordVisualTransformation(),
                 trailingIcon = {

@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.IconButton
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.material.icons.filled.Close
@@ -19,9 +18,9 @@ import androidx.compose.material.icons.filled.FileDownload
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Warning
 import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -150,9 +149,9 @@ fun DialogComponent(
 
 enum class DialogVariant(val icon: ImageVector, val color: Color) {
     ERROR(Icons.Default.Error, Color.Red),
-    SUCCESS(Icons.Default.CheckCircle, Color(0xFF4CAF50)),
+    SUCCESS(Icons.Default.CheckCircle, Color(0xFF2196F3)),
     WARNING(Icons.Default.Warning, Color(0xFFFF9800)),
-    INFO(Icons.Default.Info, Color(0xFF2196F3)),
+    INFO(Icons.Default.Info, Color(0xFF878D91)),
     DELETE(Icons.Default.Delete, Color.Red),
     EXPORT_CSV(Icons.Default.FileDownload, Color(0xFF00BCD4))
 }

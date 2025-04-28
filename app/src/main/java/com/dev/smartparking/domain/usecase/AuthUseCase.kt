@@ -1,7 +1,5 @@
 package com.dev.smartparking.domain.usecase
 
-import android.util.Log
-import com.dev.smartparking.data.model.request.ForgotPasswordVerifyOtpRequest
 import com.dev.smartparking.data.repository.AuthRepository
 import com.dev.smartparking.data.utils.Result
 import com.dev.smartparking.domain.model.ForgotPasswordModel
@@ -12,7 +10,6 @@ import com.dev.smartparking.domain.model.RegisterUser
 import com.dev.smartparking.domain.model.ResetPasswordModel
 import com.dev.smartparking.domain.model.SendPhoneOtpModel
 import com.dev.smartparking.domain.model.VerifyOTPModel
-import kotlin.math.log
 
 class AuthUseCase(private val authRepository: AuthRepository) {
     suspend fun register(
@@ -33,29 +30,16 @@ class AuthUseCase(private val authRepository: AuthRepository) {
         return when (result) {
             is Result.Success -> {
                 val userData = result.data.data
-                if (userData != null) {
-                    Result.Success(
-                        RegisterUser(
-                            username = userData.username,
-                            email = userData.email,
-                            phoneNumber = userData.phoneNumber,
-                            firstName = userData.firstName,
-                            lastName = userData.lastName,
+                Result.Success(
+                    RegisterUser(
+                        username = userData.username,
+                        email = userData.email,
+                        phoneNumber = userData.phoneNumber,
+                        firstName = userData.firstName,
+                        lastName = userData.lastName,
 //                            isLoggedIn = userData.token != null
-                        )
                     )
-                } else {
-                    Result.Success(
-                        RegisterUser(
-                            username = "",
-                            email = email,
-                            phoneNumber = phoneNumber,
-                            firstName = firstName,
-                            lastName = lastName,
-//                            isLoggedIn = false
-                        )
-                    )
-                }
+                )
             }
             is Result.Error -> Result.Error(result.exception)
             Result.Loading -> Result.Loading

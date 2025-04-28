@@ -65,52 +65,6 @@ fun RegisterScreen(
     navController: NavHostController,
     registerViewModel: RegisterViewModel
 ) {
-
-    var firstName = registerViewModel.firstName
-    var lastName = registerViewModel.lastName
-    var email = registerViewModel.email
-    var phoneNumber = registerViewModel.phoneNumber
-    var password = registerViewModel.password
-//    var username = registerViewModel.username
-
-    LoadingDialog(registerViewModel.isLoading)
-
-    DialogComponent(
-        open = registerViewModel.isRegistrationSuccessful,
-        onClose = {
-            registerViewModel.onIsRegisterSuccessfulChange(false)
-        },
-        title = "Daftar",
-        description = "Pendaftaran Berhasil",
-        variant = DialogVariant.SUCCESS,
-//        actions = listOf(
-//            DialogAction(label = "Batal", onClick = { }),
-//            DialogAction(label = "Hapus", onClick = {
-//                // TODO: Hapus data
-////                showDialog = false
-//            }, color = { Color.Red })
-//        )
-    )
-
-    DialogComponent(
-        open = registerViewModel.isRegistrationFailed,
-        onClose = {
-            registerViewModel.onIsRegisterFailedChange(false)
-        },
-        title = "Daftar",
-        description = registerViewModel.errorMessage,
-        variant = DialogVariant.ERROR,
-        actions = listOf(
-            DialogAction(label = "Tutup", onClick = {
-                registerViewModel.onIsRegisterFailedChange(false)
-            }),
-//            DialogAction(label = "Hapus", onClick = {
-//                // TODO: Hapus data
-////                showDialog = false
-//            }, color = { Color.Red })
-        )
-    )
-
     Column(
         modifier = modifier
             .fillMaxWidth()
@@ -144,7 +98,7 @@ fun RegisterScreen(
                         modifier = Modifier.fillMaxWidth(),
                         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
                         placeHolder = stringResource(R.string.txt_title_field_firstname1),
-                        value = firstName,
+                        value = registerViewModel.firstName,
                         onValueChange = { value ->
                             registerViewModel.onFirstNameChange(value = value)
                         },
@@ -171,7 +125,7 @@ fun RegisterScreen(
                         modifier = Modifier.fillMaxWidth(),
                         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
                         placeHolder = stringResource(R.string.txt_title_field_lastname1),
-                        value = lastName,
+                        value = registerViewModel.lastName,
                         onValueChange = { value ->
                             registerViewModel.onLastNameChange(value = value)
                         },
@@ -196,7 +150,7 @@ fun RegisterScreen(
                 FormTextFieldElement(
                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
                     placeHolder = stringResource(R.string.txt_title_field_email1),
-                    value = email,
+                    value = registerViewModel.email,
                     onValueChange = { value ->
                         registerViewModel.onEmailChange(value = value)
                     },
@@ -220,7 +174,7 @@ fun RegisterScreen(
                 FormTextFieldElement(
                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Phone),
                     placeHolder = stringResource(R.string.txt_place_holder_form_phone_number),
-                    value = phoneNumber,
+                    value = registerViewModel.phoneNumber,
                     onValueChange = { value -> registerViewModel.onPhoneNumberChange(value = value) },
                     visualTransformation = VisualTransformation.None,
                     trailingIcon = {
@@ -243,7 +197,7 @@ fun RegisterScreen(
             FormTextFieldElement(
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
                 placeHolder = stringResource(R.string.txt_place_holder_form_password),
-                value = password,
+                value = registerViewModel.password,
                 onValueChange = { value -> registerViewModel.onPasswordChange(value = value) },
                 visualTransformation = if (passwordVisible) VisualTransformation.None else PasswordVisualTransformation(),
                 trailingIcon = {
@@ -305,6 +259,44 @@ fun RegisterScreen(
             }
         }
     }
+
+    LoadingDialog(registerViewModel.isLoading)
+
+    DialogComponent(
+        open = registerViewModel.isRegistrationSuccessful,
+        onClose = {
+            registerViewModel.onIsRegisterSuccessfulChange(false)
+        },
+        title = "Daftar",
+        description = "Pendaftaran Berhasil",
+        variant = DialogVariant.SUCCESS,
+//        actions = listOf(
+//            DialogAction(label = "Batal", onClick = { }),
+//            DialogAction(label = "Hapus", onClick = {
+//                // TODO: Hapus data
+////                showDialog = false
+//            }, color = { Color.Red })
+//        )
+    )
+
+    DialogComponent(
+        open = registerViewModel.isRegistrationFailed,
+        onClose = {
+            registerViewModel.onIsRegisterFailedChange(false)
+        },
+        title = "Daftar",
+        description = registerViewModel.errorMessage,
+        variant = DialogVariant.ERROR,
+        actions = listOf(
+            DialogAction(label = "Tutup", onClick = {
+                registerViewModel.onIsRegisterFailedChange(false)
+            }),
+//            DialogAction(label = "Hapus", onClick = {
+//                // TODO: Hapus data
+////                showDialog = false
+//            }, color = { Color.Red })
+        )
+    )
 }
 
 @Preview(showBackground = true)

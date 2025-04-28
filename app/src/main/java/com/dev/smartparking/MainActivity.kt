@@ -6,7 +6,6 @@ import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AppCompatDelegate
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -22,8 +21,6 @@ class MainActivity : ComponentActivity() {
 
         val locale = Locale.getDefault() // Or specify your preferred locale
         val config = Configuration(resources.configuration)
-        Log.d("locale", "$locale")
-        Log.d("config", "$config")
         config.setLocale(locale)
         createConfigurationContext(config)
 

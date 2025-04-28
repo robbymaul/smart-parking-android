@@ -2,7 +2,6 @@ package com.dev.smartparking.activity
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import com.dev.smartparking.ui.screen.LoginScreen
 import com.dev.smartparking.viewmodel.LoginViewModel

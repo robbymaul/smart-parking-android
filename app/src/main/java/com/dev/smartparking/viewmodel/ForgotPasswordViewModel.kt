@@ -259,7 +259,7 @@ class ForgotPasswordViewModel(private val authUseCase: AuthUseCase) : ViewModel(
                 } ?: run {
                     isForgotPasswordFailed = true
                     errorMessage =
-                        result.exceptionOrNull()?.message ?: "Terjadi Kesalahan saat login"
+                        result.exceptionOrNull()?.message ?: "Terjadi Kesalahan saat forgot password"
                 }
 
                 if (isForgotPasswordSuccessful) {
@@ -297,7 +297,7 @@ class ForgotPasswordViewModel(private val authUseCase: AuthUseCase) : ViewModel(
                 } ?: run {
                     isForgotPasswordVerifyOtpFailed = true
                     errorMessage =
-                        result.exceptionOrNull()?.message ?: "Terjadi Kesalahan saat login"
+                        result.exceptionOrNull()?.message ?: "Terjadi Kesalahan saat verify otp"
                 }
 
                 if (isForgotPasswordVerifyOtpSuccessful) {
@@ -337,7 +337,7 @@ class ForgotPasswordViewModel(private val authUseCase: AuthUseCase) : ViewModel(
                 } ?: run {
                     isResetPasswordFailed = true
                     errorMessage =
-                        result.exceptionOrNull()?.message ?: "Terjadi Kesalahan saat login"
+                        result.exceptionOrNull()?.message ?: "Terjadi Kesalahan saat reset password"
                 }
 
                 if (isResetPasswordSuccessful) {

@@ -1,7 +1,6 @@
 package com.dev.smartparking.data.utils
 
 import android.util.Log
-import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory

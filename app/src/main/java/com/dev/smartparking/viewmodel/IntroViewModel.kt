@@ -1,16 +1,13 @@
 package com.dev.smartparking.viewmodel
 
-import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavHostController
 import com.dev.smartparking.data.IntroScreenData
 import com.dev.smartparking.provider.IntroScreenProvider
 import com.dev.smartparking.route.Screen
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.launch
 
 
 class IntroViewModel : ViewModel() {

@@ -5,11 +5,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.dev.smartparking.data.RegisterData
 import com.dev.smartparking.domain.usecase.AuthUseCase
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import kotlin.random.Random
 
 class RegisterViewModel(
     private val authUseCase: AuthUseCase

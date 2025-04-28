@@ -1,12 +1,15 @@
 package com.dev.smartparking.data.local.datastore
 
 import android.content.Context
+import android.util.Log
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import com.dev.smartparking.domain.model.UserModel
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import kotlinx.serialization.encodeToString
@@ -24,6 +27,9 @@ class AuthPreferences(private val context: Context) {
         private val USERNAME = stringPreferencesKey("username")
         private val USER = stringPreferencesKey("user")
     }
+
+    private val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
+    val jsonAdapter = moshi.adapter(UserModel::class.java)
 
     // Menggambil phone number saat berhasil login
     val userPhoneNumber: Flow<String> = context.dataStore.data.map { preferences ->
@@ -50,18 +56,23 @@ class AuthPreferences(private val context: Context) {
         preferences[USERNAME] ?: ""
     }
 
+    // Mengambil User
     val user: Flow<UserModel?> = context.dataStore.data.map { preferences ->
         preferences[USER]?.let {
-            // Menggunakan decodeFromString untuk deserialisasi
-            Json.decodeFromString<UserModel>(it)
+            // Deserialize JSON menjadi UserModel
+            val deserializedUser = jsonAdapter.fromJson(it)
+            Log.d("AuthPreferences", "Deserialized User: $deserializedUser")  // Log data user setelah dide-serialisasi
+            deserializedUser
         }
     }
 
     // Menyimpan data user
     suspend fun saveUser(user: UserModel) {
         context.dataStore.edit { preferences ->
-            // Menggunakan encodeToString untuk serialisasi
-            preferences[USER] = Json.encodeToString(user)  // Serialize objek ke JSON
+            // Serialize UserModel ke JSON
+            val serializedUser = jsonAdapter.toJson(user)
+            Log.d("AuthPreferences", "Saving User: $serializedUser")  // Log data user yang akan disimpan
+            preferences[USER] = serializedUser  // Serialize objek ke JSON
         }
     }
 
@@ -108,6 +119,7 @@ class AuthPreferences(private val context: Context) {
 
     // Menghapus semua data user
     suspend fun clearUserData() {
+        Log.d("clear user data", "trigger clear user data")
         context.dataStore.edit { preferences ->
             preferences.remove(AUTH_TOKEN)
             preferences.remove(REFRESH_TOKEN)

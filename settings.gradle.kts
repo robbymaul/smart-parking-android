@@ -12,7 +12,7 @@ pluginManagement {
     }
 
     plugins {
-        id("org.jetbrains.kotlin.plugin.serialization") version "1.6.0" // Tambahkan ini
+        id("org.jetbrains.kotlin.plugin.serialization") version "1.7.0" // Tambahkan ini
     }
 }
 dependencyResolutionManagement {

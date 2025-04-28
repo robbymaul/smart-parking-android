@@ -1,14 +1,12 @@
 package com.dev.smartparking.ui.screen
 
-import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.Text
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.produceState
@@ -23,7 +21,6 @@ import androidx.navigation.compose.rememberNavController
 import com.dev.smartparking.R
 import com.dev.smartparking.data.local.datastore.AuthPreferences
 import com.dev.smartparking.route.Screen
-import com.dev.smartparking.ui.component.ButtonComponent
 import com.dev.smartparking.ui.component.DialogComponent
 import com.dev.smartparking.ui.component.DialogVariant
 import com.dev.smartparking.ui.component.LoadingButton
@@ -52,7 +49,6 @@ fun OtpScreen(
     }
 
     LaunchedEffect(Unit) {
-        Log.d("LaunchedEffect", "triggered")
         val phone = authPreferences.userPhoneNumber.first()
         otpViewModel.phoneNumberChange(phone)
         otpViewModel.sendOtp()

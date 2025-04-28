@@ -5,8 +5,8 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.Text
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -22,7 +22,6 @@ import com.dev.smartparking.ui.component.DialogComponent
 import com.dev.smartparking.ui.component.DialogVariant
 import com.dev.smartparking.ui.component.LoadingButton
 import com.dev.smartparking.ui.component.TextFieldForgotPasswordOtpComponent
-import com.dev.smartparking.ui.element.LoadingDialog
 import com.dev.smartparking.ui.section.IntroSection
 import com.dev.smartparking.ui.theme.SmartParkingTheme
 import com.dev.smartparking.viewmodel.ForgotPasswordViewModel

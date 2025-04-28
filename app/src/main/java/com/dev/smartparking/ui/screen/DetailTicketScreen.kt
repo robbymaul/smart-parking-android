@@ -124,9 +124,9 @@ fun DetailTicketScreen(
                             )
                         ) {
                             when (status) {
-                                "On Going" ->  Text(text = "Time to Check-in")
-                                "Parking" ->  Text(text = "Time to Check-out")
-                                "Expired" ->  Text(text = "Ticket Expired")
+                                "On Going" -> Text(text = "Time to Check-in")
+                                "Parking" -> Text(text = "Time to Check-out")
+                                "Expired" -> Text(text = "Ticket Expired")
                                 "Overtime Charge" -> Text(text = "Overtime Charge")
                                 else -> {}
                             }
@@ -237,27 +237,31 @@ fun DetailTicketScreen(
 
                 }
             }
-            when (status ) {
+            when (status) {
                 "Canceled" -> {
-                        Image(
-                            painter = painterResource(R.drawable.image_canceled1),
-                            contentDescription = "",
-                            modifier = Modifier.align(Alignment.Center)
-                                .width(250.dp)
-                                .height(250.dp),
-                            alpha = 0.3f
-                        )
-                    }
-                "Completed" -> {
                     Image(
-                        painter = painterResource(R.drawable.image_completed1),
+                        painter = painterResource(R.drawable.image_canceled1),
                         contentDescription = "",
-                        modifier = Modifier.align(Alignment.Center)
+                        modifier = Modifier
+                            .align(Alignment.Center)
                             .width(250.dp)
                             .height(250.dp),
                         alpha = 0.3f
                     )
                 }
+
+                "Completed" -> {
+                    Image(
+                        painter = painterResource(R.drawable.image_completed1),
+                        contentDescription = "",
+                        modifier = Modifier
+                            .align(Alignment.Center)
+                            .width(250.dp)
+                            .height(250.dp),
+                        alpha = 0.3f
+                    )
+                }
+
                 else -> {}
             }
             if (showChargeButton) {
@@ -306,11 +310,10 @@ fun DetailTicketScreen(
 }
 
 
-
 @Preview(showBackground = true)
 @Composable
 private fun DetailTicketScreenPreview() {
     SmartParkingTheme {
-        DetailTicketScreen(navController =  null)
+        DetailTicketScreen(navController = null)
     }
 }

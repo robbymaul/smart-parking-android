@@ -1,7 +1,5 @@
 package com.dev.smartparking.domain.model
 
-import com.squareup.moshi.Json
-
 data class RegisterUser(
     val username: String,
     val email: String,

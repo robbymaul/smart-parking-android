@@ -1,15 +1,12 @@
 package com.dev.smartparking.viewmodel
 
 import android.util.Log
-import android.view.View
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.dev.smartparking.data.OTPCredentialData
 import com.dev.smartparking.domain.usecase.AuthUseCase
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class OTPViewModel(private val authUseCase: AuthUseCase): ViewModel() {

@@ -1,6 +1,5 @@
 package com.dev.smartparking.ui.section
 
-import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.paddingFromBaseline
@@ -28,7 +27,6 @@ import androidx.compose.ui.unit.dp
 import com.dev.smartparking.R
 import com.dev.smartparking.ui.element.FormTextFieldElement
 import com.dev.smartparking.ui.theme.SmartParkingTheme
-import java.util.Locale
 
 @Composable
 fun SectionFormField(

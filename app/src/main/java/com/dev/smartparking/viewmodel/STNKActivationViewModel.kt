@@ -6,32 +6,116 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.dev.smartparking.data.STNKActivationData
+import com.dev.smartparking.domain.usecase.UserUseCase
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 
-class STNKActivationViewModel: ViewModel() {
-    var stnk by mutableStateOf("")
+class STNKActivationViewModel(private val userUseCase: UserUseCase): ViewModel() {
+    // states
+    var licensePlate by mutableStateOf("")
         private set
 
+    var vehicleType by mutableStateOf("car")
+        private set
+
+    // ui states
     var isLoading by mutableStateOf(false)
         private set
 
-    var errorMessage by mutableStateOf<String>("")
+    var isCreateVehicleSuccessful by mutableStateOf(false)
         private set
 
-    var stnkActivationData by mutableStateOf(STNKActivationData())
+    var isCreateVehicleFailed by mutableStateOf(false)
         private set
 
-    fun onChanged(value: String) {
-        this.stnk = value
-        stnkActivationData.stnk = this.stnk
+    var errorMessage by mutableStateOf<String?>(null)
+        private set
+
+    // handler
+    fun onLicensePlateChange(value: String) {
+        licensePlate = value
     }
 
+    fun onVehicleTypeChange(value: String) {
+        vehicleType = value
+    }
+
+    fun isCreateVehicleSuccessfulChange(value: Boolean) {
+        isCreateVehicleSuccessful = value
+    }
+
+    fun isCreateVehicleFailedChange(value: Boolean) {
+        isCreateVehicleFailed = value
+    }
+
+    // validation
+    fun isValid(): Boolean {
+        val cleaned = licensePlate.filter { !it.isWhitespace() }.uppercase()
+        val regex = Regex("^([A-Z])([A-Z0-9]?)([0-9]{1,4})([A-Z]{0,4})$")
+        return regex.matches(cleaned)
+    }
+
+    private fun validationCreateVehicle(): Boolean {
+        if (!isValid()) {
+            errorMessage = "data tidak valid"
+            isCreateVehicleFailed = true
+            return false
+        }
+
+        if (licensePlate.isBlank()) {
+            errorMessage = "nomor kendaraan tidak boleh kosong"
+            isCreateVehicleFailed = true
+            return false
+        }
+
+        if (vehicleType.isBlank()) {
+            errorMessage = "tipe kendaraan salah"
+            isCreateVehicleFailed = true
+            return false
+        }
+
+        return true
+    }
+
+    // fetch
+    fun createVehicle(onSuccess: ()-> Unit) {
+        if (!validationCreateVehicle()) {
+            return
+        }
+
+        viewModelScope.launch {
+            try {
+                isLoading = true
+                errorMessage = null
+
+                val result = userUseCase.createVehicles(
+                    licensePlate = licensePlate ,
+                    vehicleType = vehicleType
+                )
+
+                isLoading = result.isLoading()
+
+                result.getOrNull()?.let {
+                    isCreateVehicleSuccessful = true
+                } ?: run {
+                    isCreateVehicleFailed = true
+                    errorMessage = result.exceptionOrNull()?.message ?: "Terjadi Kesalahan saat login"
+                }
+
+                if (isCreateVehicleSuccessful) {
+                    onSuccess()
+                }
+            } catch (e: Exception) {
+                isCreateVehicleFailed = true
+                errorMessage = e.message ?: "Terjadi kesahalan pada sistem"
+            } finally {
+                isLoading = false
+            }
+        }
+    }
 
     private fun formatSTNK(raw: String): String {
         val cleaned = raw.filter { !it.isWhitespace() }.uppercase()
-
         // Regex untuk mencocokkan format:
         // Group 1: Karakter pertama (wajib huruf)
         // Group 2: Karakter kedua (opsional, huruf atau digit)
@@ -56,30 +140,14 @@ class STNKActivationViewModel: ViewModel() {
         }
     }
 
-    fun getFormattedSTNK(): String {
-       return formatSTNK(stnk)
-    }
+    private fun resetStates() {
+        // state
+        licensePlate = ""
 
-    fun isValid(): Boolean {
-        val cleaned = stnk.filter { !it.isWhitespace() }.uppercase()
-        val regex = Regex("^([A-Z])([A-Z0-9]?)([0-9]{1,4})([A-Z]{0,4})$")
-        return regex.matches(cleaned)
-    }
-
-    fun submit(onSuccess: ()-> Unit) {
-        viewModelScope.launch {
-            isLoading = true
-            delay(2000)
-
-            if (stnkActivationData.stnk.isNotBlank()) {
-                if (isValid()) {
-                    onSuccess()
-                } else {
-                    errorMessage = "Invalid STNK Format"
-                }
-            } else {
-                errorMessage = "Please Enter Phone and Password"
-            }
-        }
+        // UI states
+        isLoading = false
+        errorMessage = null
+        isCreateVehicleSuccessful = false
+        isCreateVehicleFailed = false
     }
 }

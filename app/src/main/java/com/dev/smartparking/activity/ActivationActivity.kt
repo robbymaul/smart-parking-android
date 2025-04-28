@@ -5,13 +5,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.dev.smartparking.ui.screen.StnkActivationScreen
 import com.dev.smartparking.ui.theme.SmartParkingTheme
 import com.dev.smartparking.viewmodel.STNKActivationViewModel
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
-fun ActivationActivity(modifier: Modifier = Modifier, navController: NavHostController?) {
-    val stnkActivationViewModel: STNKActivationViewModel = viewModel()
+fun ActivationActivity(modifier: Modifier = Modifier, navController: NavHostController) {
+    val stnkActivationViewModel: STNKActivationViewModel = koinViewModel()
 
     StnkActivationScreen(
         modifier = modifier,
@@ -25,7 +27,7 @@ fun ActivationActivity(modifier: Modifier = Modifier, navController: NavHostCont
 private fun ActivationActivityPreview() {
     SmartParkingTheme {
         ActivationActivity(
-            navController = null
+            navController = rememberNavController()
         )
     }
 }

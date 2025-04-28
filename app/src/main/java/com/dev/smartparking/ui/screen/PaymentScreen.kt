@@ -18,7 +18,6 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -30,9 +29,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.dev.smartparking.R
-import com.dev.smartparking.route.Screen
 import com.dev.smartparking.ui.card.OrderNumberCard
-import com.dev.smartparking.ui.component.TopBarMenuHomepageComponent
 import com.dev.smartparking.ui.section.ContentSection
 import com.dev.smartparking.ui.theme.SmartParkingTheme
 import com.dev.smartparking.viewmodel.PaymentViewModel

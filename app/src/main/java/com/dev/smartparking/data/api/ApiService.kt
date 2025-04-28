@@ -1,5 +1,6 @@
 package com.dev.smartparking.data.api
 
+import com.dev.smartparking.data.model.request.CreateVehiclesRequest
 import com.dev.smartparking.data.model.request.ForgotPasswordRequest
 import com.dev.smartparking.data.model.request.ForgotPasswordVerifyOtpRequest
 import com.dev.smartparking.data.model.request.LoginRequest
@@ -8,6 +9,7 @@ import com.dev.smartparking.data.model.request.RegisterRequest
 import com.dev.smartparking.data.model.request.ResetPasswordRequest
 import com.dev.smartparking.data.model.request.SendOTPRequest
 import com.dev.smartparking.data.model.request.VerifyOTPRequest
+import com.dev.smartparking.data.model.response.CreateVehiclesResponse
 import com.dev.smartparking.data.model.response.ForgotPasswordResponse
 import com.dev.smartparking.data.model.response.ForgotPasswordVerifyOtpResponse
 import com.dev.smartparking.data.model.response.LoginResponse
@@ -16,6 +18,7 @@ import com.dev.smartparking.data.model.response.RegisterResponse
 import com.dev.smartparking.data.model.response.ResetPasswordResponse
 import com.dev.smartparking.data.model.response.ResponseData
 import com.dev.smartparking.data.model.response.SendOTPResponse
+import com.dev.smartparking.data.model.response.UserResponse
 import com.dev.smartparking.data.model.response.VerifyOTPResponse
 import retrofit2.Response
 import retrofit2.http.Body
@@ -49,5 +52,11 @@ interface ApiService {
 
     @POST("auth/reset-password")
     suspend fun resetPassword(@Body resetPasswordRequest: ResetPasswordRequest): Response<ResponseData<ResetPasswordResponse>>
+
+    @GET("users")
+    suspend fun getUser(): Response<ResponseData<UserResponse>>
+
+    @POST("users/vehicles")
+    suspend fun createVehicles(@Body createVehiclesRequest: CreateVehiclesRequest): Response<ResponseData<CreateVehiclesResponse>>
     // Tambahkan endpoint API lainnya sesuai kebutuhan
 }

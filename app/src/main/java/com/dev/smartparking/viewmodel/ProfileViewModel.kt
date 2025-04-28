@@ -7,10 +7,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.dev.smartparking.data.local.datastore.AuthPreferences
 import com.dev.smartparking.domain.usecase.AuthUseCase
+import com.dev.smartparking.domain.usecase.UserUseCase
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
 class ProfileViewModel(
+    private val userUseCase: UserUseCase,
     private val authUseCase: AuthUseCase,
     private val authPreferences: AuthPreferences
 ) : ViewModel() {

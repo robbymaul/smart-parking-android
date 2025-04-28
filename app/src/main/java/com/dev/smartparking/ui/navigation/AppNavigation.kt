@@ -16,7 +16,6 @@ import com.dev.smartparking.route.Screen
 import com.dev.smartparking.ui.screen.DetailMallScreen
 import com.dev.smartparking.ui.screen.DetailTicketScreen
 import com.dev.smartparking.ui.screen.ParkingSlotScreen
-import com.dev.smartparking.ui.screen.PaymentScreen
 import com.dev.smartparking.ui.screen.SplashScreen
 
 
