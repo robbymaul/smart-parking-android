@@ -11,25 +11,30 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import coil.decode.GifDecoder
 import coil.request.ImageRequest
 import com.dev.smartparking.R
+import com.dev.smartparking.route.Screen
 import com.dev.smartparking.ui.theme.SmartParkingTheme
 import kotlinx.coroutines.delay
 
 @Composable
 fun SplashScreen(
     modifier: Modifier = Modifier,
-    navController: NavController? = null
+    navController: NavHostController? = null
 ) {
     LaunchedEffect(
         key1 = Unit
     ) {
         delay(2000)
+        navController?.navigate(Screen.Intro.route) {
+            popUpTo(Screen.Splash.route) { inclusive = true }
+        }
     }
 
-
+    Splash(modifier = modifier)
 }
 
 @Composable

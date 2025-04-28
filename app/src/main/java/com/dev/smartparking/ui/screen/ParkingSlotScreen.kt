@@ -6,6 +6,9 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.Icon
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -16,18 +19,30 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import com.dev.smartparking.ui.card.BookParkingCard
 import com.dev.smartparking.ui.component.ListSlotParkingComponent
 import com.dev.smartparking.ui.component.MenuParkingAreaComponent
-import com.dev.smartparking.ui.component.TopBarMenuHomepageComponent
+import com.dev.smartparking.ui.component.TopBarComponent
 import com.dev.smartparking.ui.theme.SmartParkingTheme
 
 @Composable
-fun ParkingSlotScreen(modifier: Modifier = Modifier) {
+fun ParkingSlotScreen(modifier: Modifier = Modifier, navController: NavHostController?) {
     var selectedSlot by remember { mutableStateOf<Pair<Int, Int>?>(null) } // 🟢 State di sini
 
     Scaffold (
-        topBar = { TopBarMenuHomepageComponent() }
+        topBar = {
+            TopBarComponent(
+                title = "Margonda City Mall",
+                onClickIcon = {},
+                actions = {
+                    Icon(
+                        imageVector = Icons.Default.ArrowBack,
+                        contentDescription = ""
+                    )
+                }
+            )
+        }
     ) { innerPadding ->
         Box( // 🔹 Gunakan Box untuk menempatkan BookParkingCard di bawah
             modifier = modifier
@@ -54,7 +69,8 @@ fun ParkingSlotScreen(modifier: Modifier = Modifier) {
                     modifier = Modifier
                         .align(Alignment.BottomCenter) // 📌 Posisi di bawah
                         .fillMaxWidth()
-                        .padding(16.dp) // 🔹 Padding agar tidak mepet layar
+                        .padding(16.dp), // 🔹 Padding agar tidak mepet layar
+                    navController = navController
                 )
             }
         }
@@ -66,6 +82,6 @@ fun ParkingSlotScreen(modifier: Modifier = Modifier) {
 @Composable
 private fun ParkingSlotScreenPrev() {
     SmartParkingTheme {
-        ParkingSlotScreen()
+        ParkingSlotScreen(navController = null)
     }
 }

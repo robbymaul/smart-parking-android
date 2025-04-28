@@ -33,7 +33,7 @@ import java.util.Locale
 @Composable
 fun SectionFormField(
     modifier: Modifier = Modifier,
-    @StringRes title: Int,
+    title: String,
     textStyle: TextStyle,
     content: @Composable ()-> Unit
 ) {
@@ -41,7 +41,7 @@ fun SectionFormField(
         modifier = modifier
     ) {
         Text(
-            stringResource(title),
+            title,
             style = textStyle,
             modifier = Modifier
                 .paddingFromBaseline(top = 32.dp, bottom = 4.dp)
@@ -58,13 +58,13 @@ private fun SectionFormFieldPreview() {
 
     SmartParkingTheme {
         SectionFormField(
-            title = R.string.txt_title_field_password1,
+            title = stringResource(R.string.txt_title_field_password1) ,
             textStyle = MaterialTheme.typography.titleMedium
         ) {
             FormTextFieldElement(
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
-                placeHolder = R.string.txt_place_holder_form_password,
-                value = "asdasdasd",
+                placeHolder =  stringResource(R.string.txt_place_holder_form_password),
+                value = "",
                 onValueChange = {},
                 visualTransformation = if (passwordVisible) VisualTransformation.None else PasswordVisualTransformation(),
                 trailingIcon = {

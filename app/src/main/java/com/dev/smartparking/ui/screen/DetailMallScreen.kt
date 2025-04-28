@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.Scaffold
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
@@ -14,18 +13,17 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.dev.smartparking.R
+import androidx.navigation.NavHostController
 import com.dev.smartparking.R.string.txt_button_book_now
+import com.dev.smartparking.route.Screen
 import com.dev.smartparking.ui.card.ImageMallDetailCard
 import com.dev.smartparking.ui.component.ButtonComponent
 import com.dev.smartparking.ui.component.DetailMallContentComponent
 import com.dev.smartparking.ui.component.TopBarMenuHomepageComponent
-import com.dev.smartparking.ui.element.MallDirectionButtonElement
-import com.dev.smartparking.ui.element.MallDirectionInfoElement
 import com.dev.smartparking.ui.theme.SmartParkingTheme
 
 @Composable
-fun DetailMallScreen(modifier: Modifier = Modifier) {
+fun DetailMallScreen(modifier: Modifier = Modifier, navController: NavHostController?) {
     Scaffold (
         topBar = { TopBarMenuHomepageComponent()}
     ) { innerPadding ->
@@ -50,7 +48,9 @@ fun DetailMallScreen(modifier: Modifier = Modifier) {
             ButtonComponent(
                 text = txt_button_book_now,
                 textColor = MaterialTheme.colorScheme.background,
-                onClick = {},
+                onClick = {
+                    navController?.navigate(Screen.Parking.route)
+                },
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 16.dp, vertical = 8.dp)
@@ -64,6 +64,6 @@ fun DetailMallScreen(modifier: Modifier = Modifier) {
 @Composable
 private fun DetailMallScreenPreview() {
     SmartParkingTheme {
-        DetailMallScreen()
+        DetailMallScreen(navController = null)
     }
 }

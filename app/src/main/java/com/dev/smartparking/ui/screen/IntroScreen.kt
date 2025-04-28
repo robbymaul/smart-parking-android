@@ -12,6 +12,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
@@ -25,9 +26,9 @@ import com.dev.smartparking.ui.theme.SmartParkingTheme
 @Composable
 fun IntroScreen(
     modifier: Modifier = Modifier,
-    @StringRes title: Int,
-    @StringRes description: Int,
-    @DrawableRes image: Int
+    title: String,
+    description: String,
+    image: Painter
 ) {
     Column (
         modifier = modifier.padding(horizontal = 16.dp, vertical = 8.dp ),
@@ -35,8 +36,8 @@ fun IntroScreen(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Image(
-            painter = painterResource(image),
-            contentDescription = stringResource(title),
+            painter = image,
+            contentDescription = description,
             contentScale = ContentScale.Crop,
             modifier = Modifier.size(270.dp)
         )
@@ -52,9 +53,9 @@ fun IntroScreen(
 private fun IntroScreenPreview() {
     SmartParkingTheme (dynamicColor = false) {
         IntroScreen(
-            title = R.string.title_screen_easy_parking,
-            description = R.string.desc_screen_easy_parking,
-            image = R.drawable.smart_parking_logo1
+            title = stringResource(R.string.title_screen_safe_and_secure) ,
+            description = stringResource(R.string.desc_screen_easy_parking),
+            image = painterResource(R.drawable.smart_parking_logo1)
         )
     }
 }

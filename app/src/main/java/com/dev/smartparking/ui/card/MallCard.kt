@@ -42,7 +42,8 @@ fun MallCard(
     descriptionImage: String = "",
     rating: String,
     mallName: String,
-    isLike: Boolean
+    isLike: Boolean,
+    onClickButton: ()-> Unit
 ) {
     Card(
         shape = RoundedCornerShape(8.dp),
@@ -101,7 +102,7 @@ fun MallCard(
                         modifier = Modifier
                             .width(144.dp)
                             .height(32.13.dp),
-                        onClick = {},
+                        onClick = onClickButton,
                         cornerRadius = 24.dp,
                         text = R.string.txt_button_book_now,
                         textColor = MaterialTheme.colorScheme.background,
@@ -124,7 +125,8 @@ private fun MallCardPreview() {
             imageUrl = "https://res.cloudinary.com/dxdtxld4f/image/upload/v1738768682/skripsi/image_mall1_ixzb6u.jpg",
             rating = "4.5",
             mallName = "Margonda City Mall",
-            isLike = true
+            isLike = true,
+            onClickButton = {}
         )
     }
 }

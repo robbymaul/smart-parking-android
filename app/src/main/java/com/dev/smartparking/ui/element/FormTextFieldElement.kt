@@ -1,6 +1,5 @@
 package com.dev.smartparking.ui.element
 
-import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -38,29 +37,30 @@ import com.dev.smartparking.ui.theme.SmartParkingTheme
 fun FormTextFieldElement(
     modifier: Modifier = Modifier,
     keyboardOptions: KeyboardOptions,
-    @StringRes placeHolder: Int,
+    placeHolder: String,
     value: String,
-    onValueChange: (String)-> Unit,
+    onValueChange: (String) -> Unit,
     visualTransformation: VisualTransformation,
-    trailingIcon: (@Composable ()-> Unit)? = null
+    trailingIcon: (@Composable () -> Unit)? = null,
+    prefix: (@Composable () -> Unit)? = null
 ) {
     TextField(
         modifier = modifier
             .fillMaxWidth()
             .padding(8.dp),
         value = value,
+        singleLine = true,
         onValueChange = onValueChange,
         keyboardOptions = keyboardOptions,
         placeholder = {
             Text(
-                text = stringResource(placeHolder),
+                text = placeHolder,
                 style = TextStyle(
-                    textAlign = TextAlign.Start,
-                    fontWeight = FontWeight.SemiBold,
+                    fontWeight = FontWeight.Normal,
                     fontSize = 16.sp,
                     color = MaterialTheme.colorScheme.secondary.copy(alpha = 0.5f),
 
-                )
+                    )
             )
         },
         shape = RoundedCornerShape(8.dp),
@@ -76,7 +76,8 @@ fun FormTextFieldElement(
             unfocusedIndicatorColor = Color.Transparent,
             focusedIndicatorColor = Color.Transparent,
             disabledIndicatorColor = Color.Transparent
-        )
+        ),
+        prefix = prefix
     )
 }
 
@@ -84,15 +85,16 @@ fun FormTextFieldElement(
 @Composable
 private fun FormTextFieldElementPreview() {
     var passwordVisible by remember { mutableStateOf(false) }
-    SmartParkingTheme (dynamicColor = false) {
+    SmartParkingTheme(dynamicColor = false) {
         FormTextFieldElement(
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
-            placeHolder = R.string.txt_place_holder_form_password,
-            value = "asdasdasd",
+            placeHolder = stringResource(R.string.txt_place_holder_form_password),
+            value = "",
             onValueChange = {},
             visualTransformation = if (passwordVisible) VisualTransformation.None else PasswordVisualTransformation(),
             trailingIcon = {
-                val image = if (passwordVisible) Icons.Default.Visibility else Icons.Filled.VisibilityOff
+                val image =
+                    if (passwordVisible) Icons.Default.Visibility else Icons.Filled.VisibilityOff
                 IconButton(onClick = { passwordVisible = !passwordVisible }) {
                     Icon(
                         imageVector = image,

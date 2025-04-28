@@ -10,12 +10,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import com.dev.smartparking.ui.card.TicketCard
 import com.dev.smartparking.ui.component.MenuTicketComponent
 import com.dev.smartparking.ui.theme.SmartParkingTheme
 
 @Composable
-fun TicketScreen(modifier: Modifier = Modifier) {
+fun TicketScreen(modifier: Modifier = Modifier, navController: NavHostController?) {
     Column (
         modifier = modifier.fillMaxWidth()
     ) {
@@ -36,6 +37,6 @@ fun TicketScreen(modifier: Modifier = Modifier) {
 @Composable
 private fun TicketScreenPreview() {
     SmartParkingTheme {
-        TicketScreen()
+        TicketScreen(navController = null)
     }
 }

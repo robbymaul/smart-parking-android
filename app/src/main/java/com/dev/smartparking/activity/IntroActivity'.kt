@@ -1,6 +1,5 @@
 package com.dev.smartparking.activity
 
-import android.graphics.Color
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -9,38 +8,46 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowForward
-import androidx.compose.material.icons.filled.ArrowForward
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.dev.smartparking.R
+import com.dev.smartparking.route.Screen
 import com.dev.smartparking.ui.component.ButtonComponent
 import com.dev.smartparking.ui.screen.IntroScreen
 import com.dev.smartparking.ui.theme.SmartParkingTheme
+import com.dev.smartparking.viewmodel.IntroViewModel
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.HorizontalPagerIndicator
 import com.google.accompanist.pager.rememberPagerState
 import kotlinx.coroutines.launch
-import androidx.compose.foundation.layout.Box as Box1
+import androidx.compose.foundation.layout.Box
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 
 @OptIn(ExperimentalPagerApi::class)
 @Composable
-fun IntroActivity(modifier: Modifier = Modifier) {
-    val pagerState = rememberPagerState()
+fun IntroActivity(
+    modifier: Modifier = Modifier,
+    navController: NavHostController = rememberNavController(),
+    viewModel: IntroViewModel = viewModel()
+) {
+    val listScreen by viewModel.listenScreen.collectAsState()
+    val pagerState = rememberPagerState(initialPage = viewModel.currentPage)
     val coroutineScope = rememberCoroutineScope()
-    val listScreen: List<IntroScreenData> = IntroScreenProvider.getIntroScreens()
 
-    Column (
-        modifier = modifier
-    ){
+    Column(modifier = modifier) {
         HorizontalPager(
             count = listScreen.size,
             state = pagerState,
@@ -48,28 +55,28 @@ fun IntroActivity(modifier: Modifier = Modifier) {
                 .fillMaxWidth()
                 .weight(1f)
         ) { page ->
-            Box1(
+            Box(
                 modifier = Modifier.fillMaxSize(),
                 contentAlignment = Alignment.Center
             ) {
                 IntroScreen(
-                    title = listScreen[page].title,
-                    description = listScreen[page].description,
-                    image = listScreen[page].image
+                    title = stringResource(listScreen[page].title),
+                    description = stringResource(listScreen[page].description) ,
+                    image = painterResource(listScreen[page].image)
                 )
             }
         }
 
-        Row (
+        Row(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween,
-            modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 8.dp)
-        ){
-
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 16.dp, vertical = 8.dp)
+        ) {
             HorizontalPagerIndicator(
                 pagerState = pagerState,
-                modifier = Modifier
-                    .padding(16.dp),
+                modifier = Modifier.padding(16.dp),
                 activeColor = MaterialTheme.colorScheme.primary
             )
 
@@ -79,31 +86,23 @@ fun IntroActivity(modifier: Modifier = Modifier) {
                         modifier = Modifier.padding(8.dp),
                         textColor = MaterialTheme.colorScheme.background,
                         onClick = {
-                            if (pagerState.currentPage < listScreen.size -1) {
-                                coroutineScope.launch {
-                                    pagerState.animateScrollToPage(pagerState.currentPage + 1)
-                                }
+                            coroutineScope.launch {
+                                pagerState.animateScrollToPage(pagerState.currentPage + 1)
                             }
                         },
                         icon = {
                             Icon(
                                 imageVector = Icons.AutoMirrored.Default.ArrowForward,
-                                contentDescription = "icon arrow button",
+                                contentDescription = "Next page"
                             )
-                        },
+                        }
                     )
                 }
                 else -> {
                     ButtonComponent(
                         modifier = Modifier.padding(8.dp),
                         textColor = MaterialTheme.colorScheme.background,
-                        onClick = {
-                            if (pagerState.currentPage < listScreen.size -1) {
-                                coroutineScope.launch {
-                                    pagerState.animateScrollToPage(pagerState.currentPage + 1)
-                                }
-                            }
-                        },
+                        onClick = { viewModel.navigateToLogin(navController) },
                         text = R.string.txt_button_get_started
                     )
                 }
@@ -112,33 +111,6 @@ fun IntroActivity(modifier: Modifier = Modifier) {
     }
 }
 
-data class IntroScreenData(
-    val title: Int,
-    val description: Int,
-    val image: Int
-)
-
-object IntroScreenProvider {
-    fun getIntroScreens(): List<IntroScreenData> {
-        return listOf(
-            IntroScreenData(
-                title = R.string.title_screen_easy_parking,
-                description = R.string.desc_screen_easy_parking,
-                image = R.drawable.image_easy_parking1
-            ),
-            IntroScreenData(
-                title = R.string.title_screen_book_anytime_anywhere,
-                description = R.string.desc_screen_book_anytime_anywhere,
-                image = R.drawable.image_book_anytime_anywhere
-            ),
-            IntroScreenData(
-                title = R.string.title_screen_safe_and_secure,
-                description = R.string.desc_screen_safe_and_secure,
-                image = R.drawable.image_safe_and_secure1
-            )
-        )
-    }
-}
 
 @Preview(showBackground = true)
 @Composable

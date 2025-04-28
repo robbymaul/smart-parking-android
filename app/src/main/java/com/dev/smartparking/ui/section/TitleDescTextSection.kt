@@ -23,8 +23,8 @@ import com.dev.smartparking.ui.theme.SmartParkingTheme
 @Composable
 fun IntroSection(
     modifier: Modifier = Modifier,
-    @StringRes title: Int,
-    @StringRes description: Int,
+    title: String,
+    description: String,
     intro: Boolean = false
 ) {
     Column (
@@ -33,7 +33,7 @@ fun IntroSection(
          horizontalAlignment = if (intro) Alignment.Start  else Alignment.CenterHorizontally
     ) {
         Text(
-            text = stringResource(title),
+            text = title,
             modifier = Modifier.paddingFromBaseline(top = 48.dp, bottom = 16.dp),
             style = TextStyle(
                 fontWeight = FontWeight.Bold,
@@ -41,7 +41,7 @@ fun IntroSection(
             )
         )
         Text(
-            text = stringResource(description),
+            text = description,
             style = TextStyle(
                 fontWeight = FontWeight.Normal,
                 fontSize = 15.sp,
@@ -57,8 +57,8 @@ fun IntroSection(
 private fun IntroSectionPreview() {
     SmartParkingTheme (dynamicColor = false) {
         IntroSection(
-            title = R.string.title_screen_easy_parking,
-            description = R.string.desc_screen_easy_parking,
+            title = stringResource(R.string.title_screen_easy_parking),
+            description = stringResource(R.string.desc_screen_easy_parking),
         )
     }
 }

@@ -1,0 +1,80 @@
+<resources>
+    <!-- APLIKASI -->
+    <string name="app_name">Smart Parking</string>
+    <string name="dot">.</string>
+
+    <!-- TOMBOL TEKS -->
+    <string name="txt_button_book_now">Pesan Sekarang</string>
+    <string name="txt_button_register">Daftar</string>
+    <string name="txt_button_login1">Masuk</string>
+    <string name="txt_button_logout1">Keluar</string>
+    <string name="txt_button_verify_otp">Verifikasi</string>
+    <string name="txt_button_get_started">Mulai</string>
+    <string name="txt_button_submit">Kirim</string>
+
+    <!-- JUDUL TEKS -->
+    <string name="txt_title_field_phone_number1">Nomor Telepon</string>
+    <string name="txt_title_field_password1">Kata Sandi</string>
+    <string name="txt_title_field_name1">Nama</string>
+    <string name="txt_title_field_firstname1">Nama Depan</string>
+    <string name="txt_title_field_lastname1">Nama Belakang</string>
+    <string name="txt_title_field_email1">Email</string>
+    <string name="txt_title_field_phone_number">Nomor Telepon</string>
+    <string name="txt_title_field_confirm_password">Konfirmasi Kata Sandi</string>
+    <string name="txt_title_section_categories">Kategori</string>
+    <string name="txt_title_recommendation">Rekomendasi Untuk Anda</string>
+
+    <!-- DESKRIPSI TEKS -->
+    <string name="desc_field_password">*minimum panjang 6 karakter dengan kombinasi huruf besar, huruf kecil, dan angka</string>
+    <string name="desc_field_forgot_password_phone_number">Masukkan Nomor Telepon yang Valid</string>
+    <string name="desc_screen_login">Masukkan detail Anda di bawah ini atau lanjutkan dengan akun sosial Anda untuk Smart Parking</string>
+    <string name="desc_screen_register">Masukkan detail Anda di bawah ini atau lanjutkan dengan akun sosial Anda untuk Smart Parking</string>
+    <string name="desc_screen_otp">Masukkan kode yang baru saja kami kirimkan ke Nomor Telepon Anda</string>
+    <string name="desc_screen_activation">Masukkan Nomor Kendaraan yang Valid (STNK)</string>
+    <string name="desc_screen_easy_parking">Temukan dan pesan tempat parkir dengan cepat dekat tujuan Anda. Parkir jadi mudah.</string>
+    <string name="desc_screen_book_anytime_anywhere">Pesan tempat parkir kapan saja Anda membutuhkannya.</string>
+    <string name="desc_screen_safe_and_secure">Parkir dengan percaya diri di lokasi yang tepercaya, dirancang untuk menjaga kendaraan Anda tetap aman.</string>
+    <string name="desc_screen_forgot_password">Tidak masalah, kami akan mengirimkan instruksi reset kata sandi.</string>
+    <string name="desc_screen_set_new_password">Harus memiliki setidaknya 6 karakter, dengan kombinasi huruf besar, huruf kecil, angka, dan karakter khusus.</string>
+
+    <!-- JUDUL LAYAR TEKS -->
+    <string name="title_screen_login">Masuk Akun</string>
+    <string name="title_screen_register">Buat Akun</string>
+    <string name="title_screen_otp">Verifikasi OTP</string>
+    <string name="title_screen_activation">Aktivasi STNK</string>
+    <string name="title_screen_easy_parking">Parkir Mudah</string>
+    <string name="title_screen_book_anytime_anywhere">Pesan Kapan Saja, Di Mana Saja</string>
+    <string name="title_screen_safe_and_secure">Aman dan Terjamin</string>
+    <string name="title_screen_forgot_password">Lupa Kata Sandi?</string>
+    <string name="title_screen_set_new_password">Atur Kata Sandi Baru</string>
+
+    <!-- TEKS -->
+    <string name="txt_have_and_account">Sudah Punya Akun?</string>
+    <string name="txt_login">Masuk</string>
+    <string name="txt_create_account1">Buat Akun!</string>
+    <string name="txt_not_register1">Belum Terdaftar?</string>
+    <string name="txt_forgot_password1">Lupa Kata Sandi?</string>
+    <string name="txt_or_signup1">Atau Daftar Dengan</string>
+    <string name="txt_mall1">Mall</string>
+    <string name="txt_name">Nama</string>
+    <string name="txt_phone">Telepon</string>
+    <string name="txt_vehicle">Kendaraan</string>
+    <string name="txt_vehicle_number">Nomor Kendaraan</string>
+    <string name="txt_start_time">Waktu Mulai</string>
+    <string name="txt_end_time">Waktu Selesai</string>
+    <string name="txt_location">Lokasi</string>
+    <string name="txt_address">Alamat</string>
+    <string name="txt_payment_method">Metode Pembayaran</string>
+    <string name="txt_admin">Admin</string>
+    <string name="txt_discount">Diskon</string>
+    <string name="txt_total">Total</string>
+    <string name="txt_payment">Pembayaran</string>
+    <string name="txt_status">Status</string>
+    <string name="txt_total_charge">Biaya Total</string>
+
+    <!-- TOMBOL ISIAN-->
+    <string name="txt_place_holder_form_phone_number">8676684363573</string>
+    <string name="txt_place_holder_form_password">********</string>
+    <string name="txt_place_holder_form_name">Nama Lengkap</string>
+    <string name="txt_place_holder_vehicle_number">Nomor Kendaraan</string>
+</resources>

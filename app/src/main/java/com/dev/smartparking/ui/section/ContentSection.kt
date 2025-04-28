@@ -46,7 +46,8 @@ private fun ContentSectionPreview() {
                 imageUrl = "https://res.cloudinary.com/dxdtxld4f/image/upload/v1738768682/skripsi/image_mall1_ixzb6u.jpg",
                 rating = "4.5",
                 mallName = "Margonda City Mall",
-                isLike = true
+                isLike = true,
+                onClickButton = {}
             )
         }
     }

@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    id("org.jetbrains.kotlin.plugin.serialization") version "1.6.0"
 }
 
 android {
@@ -57,6 +58,19 @@ dependencies {
     implementation("com.google.accompanist:accompanist-pager-indicators:0.28.0")
     implementation("com.google.zxing:core:3.5.2")
     implementation("androidx.compose.ui:ui:1.5.1")
+    implementation("androidx.navigation:navigation-compose:2.7.4")
+    implementation("androidx.hilt:hilt-navigation-compose:1.1.0")
+    implementation("io.insert-koin:koin-android:3.1.2")
+    implementation("io.insert-koin:koin-android-compat:3.1.2") // Opsional, untuk kompatibilitas
+    implementation("com.squareup.moshi:moshi:1.12.0") // Versi Moshi
+    implementation("com.squareup.moshi:moshi-kotlin:1.12.0") // Adapter untuk Kotlin
+    implementation("com.squareup.retrofit2:retrofit:2.9.0") // Retrofit
+    implementation("com.squareup.retrofit2:converter-moshi:2.9.0") // Converter Moshi (jika menggunakan Moshi)
+    implementation("com.squareup.okhttp3:okhttp:4.9.3")
+    implementation("com.squareup.okhttp3:logging-interceptor:4.9.3")
+    implementation("androidx.datastore:datastore-preferences:1.0.0")
+    implementation("io.insert-koin:koin-androidx-compose:3.5.3")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.0")
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

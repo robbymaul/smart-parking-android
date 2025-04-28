@@ -1,6 +1,5 @@
 package com.dev.smartparking.ui.screen
 
-import android.app.Notification
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -10,13 +9,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import com.dev.smartparking.ui.card.NotificationCard
-import com.dev.smartparking.ui.card.TicketCard
 import com.dev.smartparking.ui.component.MenuNotificationComponent
 import com.dev.smartparking.ui.theme.SmartParkingTheme
 
 @Composable
-fun NotificationScreen(modifier: Modifier = Modifier) {
+fun NotificationScreen(modifier: Modifier = Modifier, navController: NavHostController?) {
     Column (modifier = modifier) {
         MenuNotificationComponent()
         LazyColumn(
@@ -35,6 +34,6 @@ fun NotificationScreen(modifier: Modifier = Modifier) {
 @Composable
 private fun NotificationScreenPreview() {
     SmartParkingTheme {
-        NotificationScreen()
+        NotificationScreen(navController = null)
     }
 }

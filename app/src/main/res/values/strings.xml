@@ -7,6 +7,7 @@
     <string name="txt_button_book_now">Book Now</string>
     <string name="txt_button_register">Register</string>
     <string name="txt_button_login1">Login</string>
+    <string name="txt_button_logout1">Logout</string>
     <string name="txt_button_verify_otp">Verify</string>
     <string name="txt_button_get_started">Get Started</string>
     <string name="txt_button_submit">Submit</string>
@@ -15,6 +16,9 @@
     <string name="txt_title_field_phone_number1">Phone Number</string>
     <string name="txt_title_field_password1">Password</string>
     <string name="txt_title_field_name1">Name</string>
+    <string name="txt_title_field_firstname1">Firstname</string>
+    <string name="txt_title_field_lastname1">Lastname</string>
+    <string name="txt_title_field_email1">Email</string>
     <string name="txt_title_field_phone_number">Phone Number</string>
     <string name="txt_title_field_confirm_password">Confirm Password</string>
     <string name="txt_title_section_categories">Categories</string>
@@ -49,7 +53,7 @@
     <string name="txt_login">Login</string>
     <string name="txt_create_account1">Create Account!</string>
     <string name="txt_not_register1">Not Registered Yet?</string>
-    <string name="txt_forgot_password1">Forgot Password</string>
+    <string name="txt_forgot_password1">Forgot Password?</string>
     <string name="txt_or_signup1">Or Signup With</string>
     <string name="txt_mall1">Mall</string>
     <string name="txt_name">Name</string>
@@ -69,7 +73,7 @@
     <string name="txt_total_charge">Total Charge</string>
 
     <!-- TEXT PLACEHOLDER-->
-    <string name="txt_place_holder_form_phone_number">08676684363573</string>
+    <string name="txt_place_holder_form_phone_number">8676684363573</string>
     <string name="txt_place_holder_form_password">********</string>
     <string name="txt_place_holder_form_name">Full Name</string>
     <string name="txt_place_holder_vehicle_number">Vehicle Number</string>
