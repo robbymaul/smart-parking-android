@@ -40,7 +40,7 @@ fun FormTextFieldElement(
     placeHolder: String,
     value: String,
     onValueChange: (String) -> Unit,
-    visualTransformation: VisualTransformation,
+    visualTransformation: VisualTransformation = VisualTransformation.None,
     trailingIcon: (@Composable () -> Unit)? = null,
     prefix: (@Composable () -> Unit)? = null
 ) {

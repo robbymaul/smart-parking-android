@@ -73,25 +73,32 @@ fun AppNavigation(
 
         composable(Screen.DetailMall.route) {
             DetailMallScreen(
-                navController = navController
+                navController = navController,
+                mallId = 1,
             )
         }
 
         composable(Screen.Parking.route) {
             ParkingSlotScreen(
-                navController = navController
+                navController = navController,
+                mallId = 1,
+                name = "",
+                price = 1,
+                nextPrice = 1
             )
         }
 
         composable(Screen.Payment.route) {
             PaymentActivity(
-                navController = navController
+                navController = navController,
+                bookingId = 1
             )
         }
 
         composable(Screen.DetailTicket.route) {
             DetailTicketScreen(
-                navController = navController
+                navController = navController,
+                bookingId = 1
             )
         }
     }

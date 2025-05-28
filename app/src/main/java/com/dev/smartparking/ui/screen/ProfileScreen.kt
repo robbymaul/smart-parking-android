@@ -13,12 +13,16 @@ import com.dev.smartparking.viewmodel.ProfileViewModel
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
-fun ProfileScreen(modifier: Modifier = Modifier, navController: NavHostController) {
-    val profileViewModel: ProfileViewModel = koinViewModel()
+fun ProfileScreen(
+    modifier: Modifier = Modifier,
+    navController: NavHostController,
+    mainNavController: NavHostController,
+    profileViewModel: ProfileViewModel
+) {
 
-    Column (modifier = modifier) {
-        ProfileCard()
-        MenuProfileCard(navController = navController, profileViewModel = profileViewModel)
+    Column(modifier = modifier) {
+        ProfileCard(profileViewModel = profileViewModel, navController = navController)
+        MenuProfileCard(navController = navController, profileViewModel = profileViewModel, mainNavController = mainNavController)
     }
 }
 
@@ -26,6 +30,10 @@ fun ProfileScreen(modifier: Modifier = Modifier, navController: NavHostControlle
 @Composable
 private fun ProfileScreenPreview() {
     SmartParkingTheme {
-        ProfileScreen(navController = rememberNavController())
+        ProfileScreen(
+            navController = rememberNavController(),
+            mainNavController = rememberNavController(),
+            profileViewModel = koinViewModel()
+        )
     }
 }

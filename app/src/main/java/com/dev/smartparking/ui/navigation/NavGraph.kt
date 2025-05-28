@@ -3,9 +3,11 @@ package com.dev.smartparking.ui.navigation
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.produceState
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.dev.smartparking.activity.ActivationActivity
 import com.dev.smartparking.activity.AuthForgotPasswordActivity
 import com.dev.smartparking.activity.HomepageActivity
@@ -84,27 +86,50 @@ fun NavGraph(
             )
         }
 
-        composable(Screen.DetailMall.route) {
-            DetailMallScreen(
-                navController = navController
+        composable(
+            route = "${Screen.DetailMall.route}/{mallId}",
+            arguments = listOf(
+                navArgument("mallId") { type = NavType.IntType }
             )
+        ) { backStackEntry ->
+            val mallId = backStackEntry.arguments?.getInt("mallId") ?: return@composable
+            DetailMallScreen(navController = navController, mallId = mallId)
         }
 
-        composable(Screen.Parking.route) {
+        composable(
+            "${Screen.Parking.route}/{name}/{mallId}/{price}/{nextPrice}",
+            arguments = listOf(
+                navArgument(name = "name") {type = NavType.StringType},
+                navArgument("mallId") { type = NavType.IntType },
+                navArgument("price") { type = NavType.IntType },
+                navArgument("nextPrice") { type = NavType.IntType },
+            )
+        ) { backStackEntry ->
+            val mallId = backStackEntry.arguments?.getInt("mallId") ?: return@composable
+            val price = backStackEntry.arguments?.getInt("price") ?: return@composable
+            val nextPrice = backStackEntry.arguments?.getInt("nextPrice") ?: return@composable
+            val name = backStackEntry.arguments?.getString("name") ?: return@composable
             ParkingSlotScreen(
-                navController = navController
+                navController = navController, name = name, mallId = mallId, price = price, nextPrice = nextPrice
             )
         }
 
-        composable(Screen.Payment.route) {
+        composable(
+            route = "${Screen.Payment.route}/{bookingId}",
+            arguments = listOf(
+                navArgument("bookingId") {type = NavType.IntType}
+            )
+            ) { backStackEntry ->
+            val bookingId = backStackEntry.arguments?.getInt("bookingId") ?: return@composable
             PaymentActivity(
-                navController = navController
+                navController = navController, bookingId = bookingId
             )
         }
 
         composable(Screen.DetailTicket.route) {
             DetailTicketScreen(
-                navController = navController
+                navController = navController,
+                bookingId = 26
             )
         }
 

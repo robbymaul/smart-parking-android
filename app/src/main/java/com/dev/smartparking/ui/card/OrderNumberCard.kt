@@ -15,9 +15,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.dev.smartparking.viewmodel.PaymentViewModel
 
 @Composable
-fun OrderNumberCard(modifier: Modifier = Modifier) {
+fun OrderNumberCard(modifier: Modifier = Modifier, orderNumber: String, slotNumber: String) {
     Card(
         modifier = modifier
             .fillMaxWidth()
@@ -39,7 +40,7 @@ fun OrderNumberCard(modifier: Modifier = Modifier) {
                     fontSize = 16.sp
                 )
                 Text(
-                    text = "MC-302518701",
+                    text = orderNumber,
                     color = Color.Yellow,
                     fontWeight = FontWeight.SemiBold,
                     fontSize = 16.sp
@@ -53,7 +54,7 @@ fun OrderNumberCard(modifier: Modifier = Modifier) {
                     fontSize = 16.sp
                 )
                 Text(
-                    text = "F1-A8",
+                    text = slotNumber,
                     color = Color.Yellow,
                     fontWeight = FontWeight.SemiBold,
                     fontSize = 16.sp

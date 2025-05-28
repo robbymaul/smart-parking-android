@@ -1,10 +1,12 @@
 package com.dev.smartparking.ui.section
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.DirectionsCar
 import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.Icon
@@ -19,13 +21,15 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.dev.smartparking.ui.element.MenuProfileElement
+import com.dev.smartparking.ui.profile.menu.ProfileDetailMenu
+import com.dev.smartparking.ui.profile.menu.ProfileMenuAction
 import com.dev.smartparking.ui.theme.SmartParkingTheme
 
 @Composable
 fun MenuProfileDetailSection(
     modifier: Modifier = Modifier,
     title: String = "",
-    content: @Composable () -> Unit
+    contents: List<ProfileDetailMenu> = emptyList()
 ) {
     Column (
         modifier = modifier
@@ -33,41 +37,32 @@ fun MenuProfileDetailSection(
             .padding(8.dp)
     ) {
         Text(
-            text = "Profile Details",
+            text = title,
             style = TextStyle(
                 fontSize = 15.sp,
                 fontWeight = FontWeight.SemiBold,
             )
         )
-        content()
+        if (contents.isNotEmpty()) {
+            contents.forEach {
+                MenuProfileElement(title = it.label, icon = it.icon, actions = it.actions)
+            }
+        }
     }
-    
 }
 
 @Preview(showBackground = true)
 @Composable
 private fun ProfileDetailSectionPreview() {
     SmartParkingTheme {
-        MenuProfileDetailSection() {
-            MenuProfileElement(
+        MenuProfileDetailSection(title = "Profile Details", contents = listOf(
+            ProfileDetailMenu(
                 icon = {
-                    Icon(
-                        imageVector = Icons.Default.Person,
-                        contentDescription = "Profile Icon",
-                        modifier = Modifier.size(24.dp)
-                    )
+                    Icon(imageVector = Icons.Filled.DirectionsCar, contentDescription = "user vehicle menu")
                 },
-                title = "My Details",
-                action = {
-                    IconButton(onClick = { /* TODO: Handle edit action */ }) {
-                        Icon(
-                            imageVector = Icons.Default.Edit,
-                            contentDescription = "Edit Icon",
-                            modifier = Modifier.size(24.dp)
-                        )
-                    }
-                }
+                label = "My Vehicle",
+                actions = listOf ( ProfileMenuAction(content = { Icon(imageVector = Icons.Filled.Edit, contentDescription = "") }) )
             )
-        }
+        ))
     }
 }

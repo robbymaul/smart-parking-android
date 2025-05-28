@@ -19,6 +19,18 @@ fun TopBarSwitcher(route: String?) {
             title = "Profile",
             onClickIcon = {}
         )
+        Screen.ProfileMyVehicle.route -> TopBarComponent(
+            title = "Profile",
+            onClickIcon = {}
+        )
+        Screen.DetailProfile.route -> TopBarComponent(
+            title = "Profile",
+            onClickIcon = {}
+        )
+        Screen.ProfilePassword.route -> TopBarComponent(
+            title = "Profile",
+            onClickIcon = {}
+        )
         else -> {}
     }
 }

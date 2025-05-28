@@ -1,14 +1,10 @@
 package com.dev.smartparking.ui.component
 
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.material.ScrollableTabRow
-import androidx.compose.material.TabRow
-import androidx.compose.material.TabRowDefaults
-import androidx.compose.material.TabRowDefaults.tabIndicatorOffset
+import androidx.compose.material3.ScrollableTabRow
 import androidx.compose.material3.Tab
+import androidx.compose.material3.TabRowDefaults
+import androidx.compose.material3.TabRowDefaults.tabIndicatorOffset
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -20,54 +16,65 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.dev.smartparking.ui.theme.SmartParkingTheme
-
+import com.dev.smartparking.viewmodel.ParkingViewModel
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun MenuParkingAreaComponent(
     modifier: Modifier = Modifier,
     selectedTab: Int = 0,
     onTabSelected: (Int) -> Unit = {},
+    parkingViewModel: ParkingViewModel,
 ) {
-    val menu: List<String> = listOf("A", "B", "C", "D", "E", "A", "B", "C", "D", "E")
+    val parkingZoneList = parkingViewModel.parkingZoneModel
+
+    if (parkingZoneList.isEmpty()) {
+        Text("No parking zones available", modifier = Modifier.padding(16.dp))
+        return
+    }
 
     ScrollableTabRow(
         modifier = modifier,
         selectedTabIndex = selectedTab,
-        backgroundColor = Color.White,
-        contentColor = Color.Blue,
-        edgePadding = 0.dp, // Supaya tidak ada padding di kiri & kanan
+        edgePadding = 0.dp,
         indicator = { tabPositions ->
-            TabRowDefaults.Indicator(
-                modifier = Modifier.tabIndicatorOffset(tabPositions[selectedTab]),
-                color = Color.Blue
-            )
-        }
+            if (tabPositions.size > selectedTab) {
+                TabRowDefaults.SecondaryIndicator(
+                    modifier = Modifier.tabIndicatorOffset(tabPositions[selectedTab]),
+                    color = Color.Blue
+                )
+            }
+        },
+        containerColor = Color.White
     ) {
-        menu.forEachIndexed { index, title ->
+        parkingZoneList.forEachIndexed { index, zone ->
             Tab(
                 selected = selectedTab == index,
                 onClick = { onTabSelected(index) },
-            ) {
-                Text(
-                    text = title,
-                    style = TextStyle(
-                        fontSize = 16.sp,
-                        fontWeight = FontWeight.Bold,
-                        color = if (selectedTab == index) Color.Blue else Color.Gray
-                    ),
-                    modifier = Modifier
-                        .padding(8.dp), // Hapus fillMaxWidth agar tidak melebar ke seluruh layar
-                    textAlign = TextAlign.Center
-                )
-            }
+                text = {
+                    Text(
+                        text = zone.zoneName,
+                        style = TextStyle(
+                            fontSize = 16.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = if (selectedTab == index) Color.Blue else Color.Gray
+                        ),
+                        modifier = Modifier.padding(8.dp),
+                        textAlign = TextAlign.Center
+                    )
+                }
+            )
         }
     }
 }
+
+
+
 
 @Preview(showBackground = true)
 @Composable
 private fun MenuParkingAreaComponentPreview() {
     SmartParkingTheme {
-        MenuParkingAreaComponent()
+        MenuParkingAreaComponent(parkingViewModel = koinViewModel())
     }
 }

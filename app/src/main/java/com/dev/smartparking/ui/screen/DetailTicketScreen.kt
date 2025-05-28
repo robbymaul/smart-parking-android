@@ -34,21 +34,31 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.dev.smartparking.R
 import com.dev.smartparking.ui.card.OrderNumberCard
 import com.dev.smartparking.ui.component.QRCodeGenerator
 import com.dev.smartparking.ui.component.TopBarMenuHomepageComponent
 import com.dev.smartparking.ui.section.ContentSection
 import com.dev.smartparking.ui.theme.SmartParkingTheme
+import com.dev.smartparking.viewmodel.DetailTicketViewModel
 import kotlinx.coroutines.delay
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun DetailTicketScreen(
     modifier: Modifier = Modifier,
     initialStatus: String = "Parking",
     initialTime: Int = 5,
-    navController: NavHostController?
+    navController: NavHostController,
+    bookingId: Int
 ) {
+    val detailTicketViewModel: DetailTicketViewModel = koinViewModel()
+
+    LaunchedEffect(Unit) {
+        detailTicketViewModel.getBooking(26) {}
+    }
+
     var status by remember { mutableStateOf(initialStatus) }
     var remainingTime by remember { mutableStateOf(initialTime) } // Waktu dalam detik
     var chargeTime by remember { mutableStateOf(0) } // Jika waktu check-out lewat, mulai charge time
@@ -78,9 +88,7 @@ fun DetailTicketScreen(
         }
     }
 
-    Scaffold(
-        topBar = { TopBarMenuHomepageComponent() }
-    ) { innerPadding ->
+    Scaffold(topBar = { TopBarMenuHomepageComponent() }) { innerPadding ->
         Box(
             modifier = Modifier
                 .fillMaxSize()
@@ -110,8 +118,7 @@ fun DetailTicketScreen(
                                 contentAlignment = Alignment.Center
                             ) {
                                 QRCodeGenerator(
-                                    url = "http://example.com",
-                                    id = "12345689"
+                                    url = "http://example.com", id = "12345689"
                                 )
                             }
                         }
@@ -119,8 +126,7 @@ fun DetailTicketScreen(
                         Row(
                             modifier = Modifier.fillMaxWidth(),
                             horizontalArrangement = Arrangement.spacedBy(
-                                16.dp,
-                                alignment = Alignment.CenterHorizontally
+                                16.dp, alignment = Alignment.CenterHorizontally
                             )
                         ) {
                             when (status) {
@@ -141,21 +147,15 @@ fun DetailTicketScreen(
                                         text = when {
                                             status == "Expired" -> "00:00"
                                             status == "Parking" && remainingTime == 0 -> String.format(
-                                                "%02d:%02d",
-                                                chargeTime / 60,
-                                                chargeTime % 60
+                                                "%02d:%02d", chargeTime / 60, chargeTime % 60
                                             )
 
                                             status == "Overtime Charge" && remainingTime == 0 -> String.format(
-                                                "%02d:%02d",
-                                                chargeTime / 60,
-                                                chargeTime % 60
+                                                "%02d:%02d", chargeTime / 60, chargeTime % 60
                                             )
 
                                             else -> String.format(
-                                                "%02d:%02d",
-                                                remainingTime / 60,
-                                                remainingTime % 60
+                                                "%02d:%02d", remainingTime / 60, remainingTime % 60
                                             )
                                         }
                                     )
@@ -163,7 +163,7 @@ fun DetailTicketScreen(
                             }
                         }
 
-                        OrderNumberCard()
+                        OrderNumberCard(orderNumber = "", slotNumber = "")
 
                         Row(
                             modifier = Modifier.fillMaxWidth(),
@@ -171,16 +171,18 @@ fun DetailTicketScreen(
                         ) {
                             ContentSection(
                                 modifier = Modifier.weight(1f),
-                                title = R.string.txt_payment
-                            ) {
-                                Text(text = "Paid")
-                            }
+                                title = R.string.txt_payment,
+                                {
+                                    Text(text = "Paid")
+                                },
+                            )
                             ContentSection(
                                 modifier = Modifier.weight(1f),
-                                title = R.string.txt_status
-                            ) {
-                                Text(text = status)
-                            }
+                                title = R.string.txt_status,
+                                {
+                                    Text(text = status)
+                                },
+                            )
                         }
 
                         Row(
@@ -189,16 +191,18 @@ fun DetailTicketScreen(
                         ) {
                             ContentSection(
                                 modifier = Modifier.weight(1f),
-                                title = R.string.txt_name
-                            ) {
-                                Text(text = "Robby Maulana")
-                            }
+                                title = R.string.txt_name,
+                                {
+                                    Text(text = "Robby Maulana")
+                                },
+                            )
                             ContentSection(
                                 modifier = Modifier.weight(1f),
-                                title = R.string.txt_phone
-                            ) {
-                                Text(text = "0898778567656")
-                            }
+                                title = R.string.txt_phone,
+                                {
+                                    Text(text = "0898778567656")
+                                },
+                            )
                         }
 
                         Row(
@@ -207,31 +211,35 @@ fun DetailTicketScreen(
                         ) {
                             ContentSection(
                                 modifier = Modifier.weight(1f),
-                                title = R.string.txt_start_time
-                            ) {
-                                Text(text = "10:00")
-                            }
+                                title = R.string.txt_start_time,
+                                {
+                                    Text(text = "10:00")
+                                },
+                            )
                             ContentSection(
                                 modifier = Modifier.weight(1f),
-                                title = R.string.txt_end_time
-                            ) {
-                                Text(text = "12:00")
-                            }
+                                title = R.string.txt_end_time,
+                                {
+                                    Text(text = "12:00")
+                                },
+                            )
                         }
 
                         ContentSection(
                             modifier = Modifier.fillMaxWidth(),
-                            title = R.string.txt_location
-                        ) {
-                            Text(text = "Margonda City Mall")
-                        }
+                            title = R.string.txt_location,
+                            {
+                                Text(text = "Margonda City Mall")
+                            },
+                        )
 
                         ContentSection(
                             modifier = Modifier.fillMaxWidth(),
-                            title = R.string.txt_address
-                        ) {
-                            Text(text = "Jalan Margonda Raya Kota Depok Jawa Barat")
-                        }
+                            title = R.string.txt_address,
+                            {
+                                Text(text = "Jalan Margonda Raya Kota Depok Jawa Barat")
+                            },
+                        )
                     }
 
 
@@ -269,8 +277,7 @@ fun DetailTicketScreen(
                     modifier = Modifier
                         .fillMaxWidth()
                         .align(Alignment.BottomCenter) // Menjaga posisi tetap di bawah
-                        .padding(8.dp),
-                    colors = CardDefaults.cardColors(
+                        .padding(8.dp), colors = CardDefaults.cardColors(
                         containerColor = Color.Black
                     )
                 ) {
@@ -285,8 +292,7 @@ fun DetailTicketScreen(
                                 color = Color.White
                             )
                             Text(
-                                text = "-",
-                                color = Color.White
+                                text = "-", color = Color.White
                             )
                         }
 
@@ -314,6 +320,6 @@ fun DetailTicketScreen(
 @Composable
 private fun DetailTicketScreenPreview() {
     SmartParkingTheme {
-        DetailTicketScreen(navController = null)
+        DetailTicketScreen(navController = rememberNavController(), bookingId = 1)
     }
 }

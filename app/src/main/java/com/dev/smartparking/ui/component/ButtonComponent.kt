@@ -24,12 +24,12 @@ import com.dev.smartparking.ui.theme.SmartParkingTheme
 @Composable
 fun ButtonComponent(
     modifier: Modifier = Modifier,
-    onClick: () -> Unit,
     @StringRes text: Int = R.string.dot,
     icon:@Composable  (()-> Unit)? = null,
     cornerRadius: Dp = 15.dp,
     textColor: Color,
-    textSize: TextUnit = 16.sp
+    textSize: TextUnit = 16.sp,
+    onClick: () -> Unit,
 ) {
     Button (
         modifier = modifier,

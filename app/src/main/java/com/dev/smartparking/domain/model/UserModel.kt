@@ -1,6 +1,8 @@
 package com.dev.smartparking.domain.model
 
-data class UserModel (
+import com.squareup.moshi.Json
+
+data class UserModel(
     val username: String,
     val email: String,
     val phoneNumber: String,
@@ -11,7 +13,20 @@ data class UserModel (
     val isVehicleActivated: Boolean
 )
 
-data class VehicleModel (
+data class UserProfileModel(
+    val firstName: String,
+    val lastName: String,
+    val profilePhoto: String?,
+    val gender: String?,
+    val dateOfBirth: String?,
+    val address: String?,
+    val city: String?,
+    val state: String?,
+    val postalCode: String?,
+    val country: String?
+)
+
+data class VehicleModel(
     val id: Int,
     val licensePlate: String,
     val vehicleType: String,
@@ -23,6 +38,11 @@ data class VehicleModel (
     val width: Double,
     val height: Double,
     val isActive: Boolean,
-    val createdAt: String,
-    val updatedAt: String,
+    val createdAt: String = "",
+    val updatedAt: String = "",
+)
+
+data class UpdatePasswordModel(
+    val success: Boolean,
+    val message: String
 )

@@ -1,34 +1,37 @@
 package com.dev.smartparking.ui.component
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.dev.smartparking.domain.model.ParkingSlotModel
 import com.dev.smartparking.ui.card.ListSlotParkingCard
 import com.dev.smartparking.ui.theme.SmartParkingTheme
 
 @Composable
 fun ListSlotParkingComponent(
     modifier: Modifier = Modifier,
-    selectedSlot: Pair<Int, Int>?, // 🟢 Tambahkan parameter state
-    onSlotSelected: (Pair<Int, Int>) -> Unit // 🔹 Callback agar bisa mengupdate slot
+    selectedSlot: ParkingSlotModel?,
+    onSlotSelected: (ParkingSlotModel?) -> Unit,
+    parkingSlots: List<ParkingSlotModel>, // 🔹 Terima data parking slot dari luar
+    area: String
 ) {
-    LazyColumn(
-        modifier = modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.spacedBy(16.dp)
-    ) {
-        items(count = 10) { index ->
-            ListSlotParkingCard(
-                area = "A$index",
-                selectedSlot = selectedSlot,
-                onSlotSelected = onSlotSelected // 🔹 Kirim callback ke bawah
-            )
-        }
-    }
+    ListSlotParkingCard(
+        modifier = modifier,
+        area = area, // atau informasi lain yang sesuai
+        selectedSlot = selectedSlot,
+        onSlotSelected = { slot -> // slot now refers to Pair<Int, Int>
+            onSlotSelected(slot) // Pass the slot directly
+        },
+        parkingSlots = parkingSlots
+    )
 }
+
+
 
 
 @Preview(showBackground = true)
@@ -38,6 +41,8 @@ private fun ListSlotParkingComponentPreview() {
         ListSlotParkingComponent(
             selectedSlot = null,
             onSlotSelected = {},
+            parkingSlots = listOf<ParkingSlotModel>(),
+            area = ""
         )
     }
 }

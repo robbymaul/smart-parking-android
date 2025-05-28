@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.material.Divider
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Star
@@ -17,7 +16,6 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
@@ -25,14 +23,15 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.dev.smartparking.R
+import com.dev.smartparking.domain.model.PlacesRatingModel
 import com.dev.smartparking.ui.theme.SmartParkingTheme
 
 @Composable
 fun ReviewsCard(
     modifier: Modifier = Modifier,
-    rating: Int // Tambahkan parameter rating
+    placesRatingModel: PlacesRatingModel
 ) {
-    Column (
+    Column(
         modifier = modifier
     ) {
         Card(
@@ -59,15 +58,11 @@ fun ReviewsCard(
                         modifier = Modifier.fillMaxWidth(),
                         horizontalArrangement = Arrangement.SpaceBetween
                     ) {
-                        Text(text = "Robby Maulana")
-                        StarRating(rating) // Menampilkan bintang sesuai rating
+                        Text(text = "${placesRatingModel.user?.firstName ?: ""} ${placesRatingModel.user?.lastName ?: ""} ")
+                        StarRating(placesRatingModel.ratingScore) // Menampilkan bintang sesuai rating
                     }
                     Text(
-                        text = "Lorem ipsum dolor sitamter Lorem ipsum dolor sitamter Lorem ipsum dolor sitamterLorem ipsum dolor sitamter" +
-                                "Lorem ipsum dolor sitamterLorem ipsum dolor sitamterLorem ipsum dolor sitamter" +
-                                "Lorem ipsum dolor sitamter Lorem ipsum dolor sitamter" +
-                                "Lorem ipsum dolor sitamter" +
-                                "Lorem ipsum dolor sitamter",
+                        text = placesRatingModel.reviewComment,
                         maxLines = 3,
                         overflow = TextOverflow.Ellipsis
                     )
@@ -97,7 +92,12 @@ private fun StarRating(rating: Int) {
 private fun ReviewsCardPreview() {
     SmartParkingTheme {
         ReviewsCard(
-            rating = 4
+            placesRatingModel = PlacesRatingModel(
+                id = 1,
+                reviewComment = "",
+                ratingScore = 1,
+                user = null
+            )
         )
     }
 }

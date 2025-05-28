@@ -1,6 +1,8 @@
 package com.dev.smartparking.ui.section
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -9,44 +11,51 @@ import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.rememberTextMeasurer
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.sp
+import androidx.compose.ui.unit.dp
 import com.dev.smartparking.R
 import com.dev.smartparking.ui.theme.SmartParkingTheme
 
 @Composable
 fun ExpandableTextSection(
+    modifier: Modifier = Modifier,
     title: Int,
     content: String
 ) {
     var expanded by remember { mutableStateOf(false) }
     var line by remember { mutableIntStateOf(10) }
 
-    ContentSection(title = title) {
-        Column {
+    ContentSection(modifier = modifier
+        .fillMaxWidth()
+        .padding(8.dp), title = title) {
+        Column() {
             Text(
                 text = content,
                 maxLines = line,
                 overflow = TextOverflow.Ellipsis,
-
+                style = TextStyle(
+                    textAlign = TextAlign.Justify
+                )
             )
-                TextButton(onClick = {
-                    expanded = !expanded
-                    line = if (expanded) Int.MAX_VALUE else 10
-                }) {
+            TextButton(onClick = {
+                expanded = !expanded
+                line = if (expanded) Int.MAX_VALUE else 10
+            }) {
+                if (content.length < line) {
                     Text(
-                        text = if (expanded) "Read Less" else "Read More",
+                        text = if (expanded) "Read Less" else "Read More...",
                         color = Color.Blue
                     )
+                }
             }
         }
     }
 }
-
 
 
 @Preview(showBackground = true)

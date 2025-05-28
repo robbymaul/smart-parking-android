@@ -12,10 +12,14 @@ import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import com.dev.smartparking.ui.navigation.SmartParkingAppEntry
 import com.dev.smartparking.ui.theme.SmartParkingTheme
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationCallback
+import com.google.android.gms.location.LocationRequest
 import java.util.Locale
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
 

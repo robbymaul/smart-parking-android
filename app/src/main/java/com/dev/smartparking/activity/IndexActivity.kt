@@ -16,11 +16,16 @@ import com.dev.smartparking.route.Screen
 import com.dev.smartparking.ui.component.TopBarSwitcher
 import com.dev.smartparking.ui.element.LoadingDialog
 import com.dev.smartparking.ui.navigation.BottomNavigationBar
+import com.dev.smartparking.ui.screen.DetailProfileScreen
 import com.dev.smartparking.ui.screen.HomepageScreen
 import com.dev.smartparking.ui.screen.NotificationScreen
+import com.dev.smartparking.ui.screen.ProfileMyVehicleScreen
+import com.dev.smartparking.ui.screen.ProfilePasswordScreen
 import com.dev.smartparking.ui.screen.ProfileScreen
 import com.dev.smartparking.ui.screen.TicketScreen
+import com.dev.smartparking.viewmodel.HomepageViewModel
 import com.dev.smartparking.viewmodel.IndexViewModel
+import com.dev.smartparking.viewmodel.ProfileViewModel
 import kotlinx.coroutines.flow.first
 import org.koin.androidx.compose.koinViewModel
 import org.koin.compose.koinInject
@@ -29,9 +34,12 @@ import org.koin.compose.koinInject
 fun IndexActivity(modifier: Modifier = Modifier, navController: NavHostController) {
     val bottomNavController = rememberNavController()
     val indexViewModel: IndexViewModel = koinViewModel()
+    val homepageViewModel: HomepageViewModel = koinViewModel()
     val navBackStackEntry by bottomNavController.currentBackStackEntryAsState()
     val currentRout = navBackStackEntry?.destination?.route
     val authPreferences: AuthPreferences = koinInject()
+    val profileViewModel: ProfileViewModel = koinViewModel()
+
 
     LaunchedEffect(Unit) {
         authPreferences.user.first()?.let {
@@ -61,22 +69,44 @@ fun IndexActivity(modifier: Modifier = Modifier, navController: NavHostControlle
         ) {
             composable(Screen.Homepage.route) {
                 HomepageScreen(
-                    navController = navController
+                    navController = bottomNavController,
+                    mainNavController = navController,
+                    homepageViewModel = homepageViewModel
                 )
             }
             composable(Screen.Ticket.route) {
                 TicketScreen(
-                    navController = navController
+                    navController = bottomNavController
                 )
             }
             composable(Screen.Notification.route) {
                 NotificationScreen(
-                    navController = navController
+                    navController = bottomNavController
                 )
             }
             composable(Screen.Profile.route) {
                 ProfileScreen(
-                    navController = navController
+                    navController = bottomNavController,
+                    mainNavController = navController,
+                    profileViewModel = profileViewModel
+                )
+            }
+            composable(route = Screen.ProfileMyVehicle.route) {
+                ProfileMyVehicleScreen(
+                    navController = bottomNavController,
+                    profileViewModel = profileViewModel
+                )
+            }
+            composable(route = Screen.DetailProfile.route) {
+                DetailProfileScreen(
+                    navController = bottomNavController,
+                    profileViewModel = profileViewModel
+                )
+            }
+            composable(route = Screen.ProfilePassword.route) {
+                ProfilePasswordScreen(
+                    navController = bottomNavController,
+                    profileViewModel = profileViewModel
                 )
             }
         }

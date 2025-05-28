@@ -1,22 +1,22 @@
 package com.dev.smartparking.ui.card
 
+import android.util.Log
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.DirectionsCar
 import androidx.compose.material.icons.filled.Edit
-import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.filled.Password
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -35,18 +35,20 @@ import com.dev.smartparking.R
 import com.dev.smartparking.route.Screen
 import com.dev.smartparking.ui.component.DialogAction
 import com.dev.smartparking.ui.component.DialogComponent
-import com.dev.smartparking.ui.component.DialogVariant
-import com.dev.smartparking.ui.element.MenuProfileElement
+import com.dev.smartparking.ui.profile.menu.ProfileDetailMenu
+import com.dev.smartparking.ui.profile.menu.ProfileMenuAction
 import com.dev.smartparking.ui.section.MenuProfileDetailSection
 import com.dev.smartparking.ui.theme.SmartParkingTheme
 import com.dev.smartparking.viewmodel.ProfileViewModel
 import org.koin.androidx.compose.koinViewModel
 
+
 @Composable
 fun MenuProfileCard(
     modifier: Modifier = Modifier,
     navController: NavHostController,
-    profileViewModel: ProfileViewModel
+    profileViewModel: ProfileViewModel,
+    mainNavController: NavHostController
 ) {
     var showDialog by remember { mutableStateOf(false) }
 
@@ -70,28 +72,50 @@ fun MenuProfileCard(
                     .fillMaxWidth()
                     .weight(1f) // Tambahkan weight agar tidak memakan seluruh tinggi Card
             ) {
-                items(count = 15) {
-                    MenuProfileDetailSection {
-                        MenuProfileElement(
+                item {
+                    MenuProfileDetailSection(title = "Profile Details", contents = listOf(
+                        ProfileDetailMenu(
                             icon = {
                                 Icon(
-                                    imageVector = Icons.Default.Person,
-                                    contentDescription = "Profile Icon",
-                                    modifier = Modifier.size(24.dp)
+                                    imageVector = Icons.Filled.DirectionsCar,
+                                    contentDescription = "user vehicle menu"
                                 )
                             },
-                            title = "My Details",
-                            action = {
-                                IconButton(onClick = { }) {
-                                    Icon(
-                                        imageVector = Icons.Default.Edit,
-                                        contentDescription = "Edit Icon",
-                                        modifier = Modifier.size(24.dp)
-                                    )
-                                }
-                            }
-                        )
-                    }
+                            label = "My Vehicle",
+                            actions = listOf(ProfileMenuAction(content = {
+                                Icon(
+                                    imageVector = Icons.Filled.Edit,
+                                    contentDescription = "edit vehicle"
+                                )
+                            }) {
+                                Log.d("icon menu action", "called icon menu action")
+                                navController.navigate(route = Screen.ProfileMyVehicle.route)
+                            })
+                        ))
+                    )
+                }
+
+                item {
+                    MenuProfileDetailSection(title = "Account Setting", contents = listOf(
+                        ProfileDetailMenu(
+                            icon = {
+                                Icon(
+                                    imageVector = Icons.Filled.Password,
+                                    contentDescription = "menu password"
+                                )
+                            },
+                            label = "Password",
+                            actions = listOf(ProfileMenuAction(content = {
+                                Icon(
+                                    imageVector = Icons.Filled.Edit,
+                                    contentDescription = "edit password"
+                                )
+                            }) {
+                                Log.d("icon menu action", "called icon menu action")
+                                navController.navigate(route = Screen.ProfilePassword.route)
+                            })
+                        ))
+                    )
                 }
             }
 
@@ -124,7 +148,7 @@ fun MenuProfileCard(
         actions = listOf(
             DialogAction(label = "Ya", onClick = {
                 profileViewModel.logout()
-                navController.navigate(Screen.Login.route) {
+                mainNavController.navigate(Screen.Login.route) {
                     popUpTo(Screen.Profile.route) { inclusive = true }
                 }
             }),
@@ -140,6 +164,32 @@ fun MenuProfileCard(
 @Composable
 private fun MenuProfileCardPreview() {
     SmartParkingTheme {
-        MenuProfileCard(navController = rememberNavController(), profileViewModel = koinViewModel())
+        MenuProfileCard(
+            navController = rememberNavController(),
+            profileViewModel = koinViewModel(),
+            mainNavController = rememberNavController()
+        )
     }
 }
+
+//                    MenuProfileDetailSection {
+//                        MenuProfileElement(
+//                            icon = {
+//                                Icon(
+//                                    imageVector = Icons.Default.Person,
+//                                    contentDescription = "Profile Icon",
+//                                    modifier = Modifier.size(24.dp)
+//                                )
+//                            },
+//                            title = "My Details",
+//                            action = {
+//                                IconButton(onClick = { }) {
+//                                    Icon(
+//                                        imageVector = Icons.Default.Edit,
+//                                        contentDescription = "Edit Icon",
+//                                        modifier = Modifier.size(24.dp)
+//                                    )
+//                                }
+//                            }
+//                        )
+//                    }

@@ -31,14 +31,14 @@ import com.dev.smartparking.ui.theme.SmartParkingTheme
 @Composable
 fun LoadingButton(
     modifier: Modifier = Modifier,
-    onClick: () -> Unit,
     @StringRes text: Int = R.string.dot,
     icon: @Composable (() -> Unit)? = null,
     cornerRadius: Dp = 15.dp,
     textColor: Color = MaterialTheme.colorScheme.onPrimary,
     textSize: TextUnit = 16.sp,
     isLoading: Boolean = false,
-    enabled: Boolean = true
+    enabled: Boolean = true,
+    onClick: () -> Unit
 ) {
     Button(
         modifier = modifier.fillMaxWidth(),

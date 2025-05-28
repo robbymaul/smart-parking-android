@@ -29,19 +29,22 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.dev.smartparking.R
+import com.dev.smartparking.data.utils.formatToWIBDateTime
 import com.dev.smartparking.ui.card.OrderNumberCard
 import com.dev.smartparking.ui.section.ContentSection
 import com.dev.smartparking.ui.theme.SmartParkingTheme
 import com.dev.smartparking.viewmodel.PaymentViewModel
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun PaymentScreen(
     modifier: Modifier = Modifier,
     navController: NavHostController?,
-    paymentViewModel: PaymentViewModel
+    paymentViewModel: PaymentViewModel,
 ) {
-    Column (
-        modifier = modifier.padding(8.dp)
+    Column(
+        modifier = modifier
+            .padding(8.dp)
             .fillMaxSize()
     ) {
         Card(
@@ -55,7 +58,10 @@ fun PaymentScreen(
                     .padding(16.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                item { OrderNumberCard() }
+                item { OrderNumberCard(
+                    orderNumber = paymentViewModel.bookingModel?.bookingReference ?: "",
+                    slotNumber = paymentViewModel.bookingModel?.slotNumber ?: ""
+                ) }
 
                 // Baris 1
                 item {
@@ -65,18 +71,20 @@ fun PaymentScreen(
                     ) {
                         ContentSection(
                             modifier = Modifier.weight(1f),
-                            title = R.string.txt_name
-                        ) {
-                            Text(
-                                text = "Robby Maulana"
-                            )
-                        }
+                            title = R.string.txt_name,
+                            {
+                                Text(
+                                    text = paymentViewModel.bookingModel?.name ?: ""
+                                )
+                            },
+                        )
                         ContentSection(
                             modifier = Modifier.weight(1f),
-                            title = R.string.txt_phone
-                        ) {
-                            Text(text = "Robby Maulana")
-                        }
+                            title = R.string.txt_phone,
+                            {
+                                Text(text = paymentViewModel.bookingModel?.phoneNumber ?: "")
+                            },
+                        )
                     }
                 }
 
@@ -88,16 +96,18 @@ fun PaymentScreen(
                     ) {
                         ContentSection(
                             modifier = Modifier.weight(1f),
-                            title = R.string.txt_vehicle
-                        ) {
-                            Text(text = "Robby Maulana")
-                        }
+                            title = R.string.txt_vehicle,
+                            {
+                                Text(text = paymentViewModel.bookingModel?.vehicle ?: "")
+                            },
+                        )
                         ContentSection(
                             modifier = Modifier.weight(1f),
-                            title = R.string.txt_vehicle_number
-                        ) {
-                            Text(text = "Robby Maulana")
-                        }
+                            title = R.string.txt_vehicle_number,
+                            {
+                                Text(text = paymentViewModel.bookingModel?.licencePlate ?: "")
+                            },
+                        )
                     }
                 }
 
@@ -109,15 +119,15 @@ fun PaymentScreen(
                     ) {
                         ContentSection(
                             modifier = Modifier.weight(1f),
-                            title = R.string.txt_start_time
+                            title = R.string.txt_start_time,
                         ) {
-                            Text(text = "Robby Maulana")
+                            Text(text = formatToWIBDateTime(paymentViewModel.bookingModel?.startTime))
                         }
                         ContentSection(
                             modifier = Modifier.weight(1f),
-                            title = R.string.txt_end_time
-                        ) {
-                            Text(text = "Robby Maulana")
+                            title = R.string.txt_end_time,
+                            ) {
+                            Text(text = formatToWIBDateTime(paymentViewModel.bookingModel?.endTime))
                         }
                     }
                 }
@@ -125,44 +135,49 @@ fun PaymentScreen(
                 item {
                     ContentSection(
                         modifier = Modifier.fillMaxWidth(),
-                        title = R.string.txt_location
-                    ) {
-                        Text(text = "Robby Maulana")
-                    }
+                        title = R.string.txt_location,
+                        {
+                            Text(text = paymentViewModel.bookingModel?.location ?: "")
+                        },
+
+                        )
                 }
 
                 item {
                     ContentSection(
                         modifier = Modifier.fillMaxWidth(),
-                        title = R.string.txt_address
-                    ) {
-                        Text(text = "Robby Maulana")
-                    }
+                        title = R.string.txt_address,
+                        {
+                            Text(text = paymentViewModel.bookingModel?.address ?: "")
+                        },
+
+                        )
                 }
                 item {
                     ContentSection(
                         modifier = Modifier.weight(1f),
-                        title = R.string.txt_payment_method // Pastikan string ini sesuai dengan kebutuhan
-                    ) {
-                        Row(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .clickable {
-                                    // Aksi ketika diklik (misalnya buka dialog pilih pembayaran)
-                                },
-                        ) {
-                            Text(
-                                text = "Pilih Pembayaran",
-                                color = MaterialTheme.colorScheme.primary, // Bisa diubah sesuai tema
-                                fontWeight = FontWeight.Bold
-                            )
-                            Icon(
-                                imageVector = Icons.AutoMirrored.Default.ArrowRight, // Ikon tanda ">"
-                                contentDescription = "Pilih pembayaran",
-                                tint = MaterialTheme.colorScheme.primary
-                            )
-                        }
-                    }
+                        title = R.string.txt_payment_method,
+                        {
+                            Row(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .clickable {
+                                        // Aksi ketika diklik (misalnya buka dialog pilih pembayaran)
+                                    },
+                            ) {
+                                Text(
+                                    text = "Pilih Pembayaran",
+                                    color = MaterialTheme.colorScheme.primary, // Bisa diubah sesuai tema
+                                    fontWeight = FontWeight.Bold
+                                )
+                                Icon(
+                                    imageVector = Icons.AutoMirrored.Default.ArrowRight, // Ikon tanda ">"
+                                    contentDescription = "Pilih pembayaran",
+                                    tint = MaterialTheme.colorScheme.primary
+                                )
+                            }
+                        },
+                    )
                 }
 
                 item {
@@ -185,7 +200,7 @@ fun PaymentScreen(
                                     color = Color.White
                                 )
                                 Text(
-                                    text = "-",
+                                    text = "${paymentViewModel.bookingModel?.adminFee ?: 0}",
                                     color = Color.White
                                 ) // Warna teks putih
                             }
@@ -196,7 +211,7 @@ fun PaymentScreen(
                                     color = Color.White
                                 )
                                 Text(
-                                    text = "-",
+                                    text = "${paymentViewModel.bookingModel?.discount ?: 0}",
                                     color = Color.White
                                 )
                             }
@@ -207,7 +222,7 @@ fun PaymentScreen(
                                     color = Color.White
                                 )
                                 Text(
-                                    text = "-",
+                                    text = "${paymentViewModel.bookingModel?.estimatedPrice ?: 0}",
                                     color = Color.White
                                 )
                             }
@@ -240,7 +255,7 @@ private fun PaymentScreenPreview() {
     SmartParkingTheme {
         PaymentScreen(
             navController = null,
-            paymentViewModel = PaymentViewModel()
+            paymentViewModel = koinViewModel(),
         )
     }
 }

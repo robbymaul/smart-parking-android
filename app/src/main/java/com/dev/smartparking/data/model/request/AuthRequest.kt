@@ -40,6 +40,13 @@ data class ForgotPasswordRequest(
 )
 
 @JsonClass(generateAdapter = true)
+data class UpdatePasswordRequest(
+    @Json(name = "oldPassword") val oldPassword: String,
+    @Json(name = "newPassword") val newPassword: String,
+    @Json(name = "confirmNewPassword") val confirmNewPassword: String,
+)
+
+@JsonClass(generateAdapter = true)
 data class ForgotPasswordVerifyOtpRequest(
     @Json(name = "phoneNumber") val phoneNumber: String,
     @Json(name = "otp") val otp: String
