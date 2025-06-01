@@ -20,6 +20,8 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -28,9 +30,15 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.dev.smartparking.R
 import com.dev.smartparking.data.utils.formatToWIBDateTime
+import com.dev.smartparking.domain.model.PaymentMethod
+import com.dev.smartparking.route.Screen
 import com.dev.smartparking.ui.card.OrderNumberCard
+import com.dev.smartparking.ui.component.DialogAction
+import com.dev.smartparking.ui.component.DialogComponent
+import com.dev.smartparking.ui.component.DialogVariant
 import com.dev.smartparking.ui.section.ContentSection
 import com.dev.smartparking.ui.theme.SmartParkingTheme
 import com.dev.smartparking.viewmodel.PaymentViewModel
@@ -39,9 +47,12 @@ import org.koin.androidx.compose.koinViewModel
 @Composable
 fun PaymentScreen(
     modifier: Modifier = Modifier,
-    navController: NavHostController?,
+    navController: NavHostController,
     paymentViewModel: PaymentViewModel,
 ) {
+    val showSheet = remember { mutableStateOf(false) }
+    val selectedPayment = remember { mutableStateOf<PaymentMethod?>(null) }
+
     Column(
         modifier = modifier
             .padding(8.dp)
@@ -58,10 +69,12 @@ fun PaymentScreen(
                     .padding(16.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                item { OrderNumberCard(
-                    orderNumber = paymentViewModel.bookingModel?.bookingReference ?: "",
-                    slotNumber = paymentViewModel.bookingModel?.slotNumber ?: ""
-                ) }
+                item {
+                    OrderNumberCard(
+                        orderNumber = paymentViewModel.bookingModel?.bookingReference ?: "",
+                        slotNumber = paymentViewModel.bookingModel?.slotNumber ?: ""
+                    )
+                }
 
                 // Baris 1
                 item {
@@ -126,7 +139,7 @@ fun PaymentScreen(
                         ContentSection(
                             modifier = Modifier.weight(1f),
                             title = R.string.txt_end_time,
-                            ) {
+                        ) {
                             Text(text = formatToWIBDateTime(paymentViewModel.bookingModel?.endTime))
                         }
                     }
@@ -163,6 +176,8 @@ fun PaymentScreen(
                                     .fillMaxWidth()
                                     .clickable {
                                         // Aksi ketika diklik (misalnya buka dialog pilih pembayaran)
+                                        paymentViewModel.getListPaymentMethod {}
+                                        showSheet.value = true
                                     },
                             ) {
                                 Text(
@@ -231,13 +246,22 @@ fun PaymentScreen(
 
                             Button(
                                 onClick = {
-                                    paymentViewModel.handleClickPayment(navController)
+//                                    paymentViewModel.handleClickPayment(navController)
+
+                                    navController.navigate(route = "${Screen.CheckStatusPayment.route}/${29}")
+
+                                    paymentViewModel.payment(
+                                        bookingId = paymentViewModel.bookingModel?.id ?: 0,
+                                        paymentMethodId = selectedPayment.value?.id ?: 0,
+                                        onSuccess = {},
+                                        onFailed = {},
+                                        )
                                 },
                                 modifier = Modifier.fillMaxWidth(),
                                 colors = ButtonDefaults.buttonColors(containerColor = Color.White)
                             ) {
                                 Text(
-                                    text = stringResource(id = R.string.txt_button_book_now),
+                                    text = stringResource(id = R.string.txt_button_payment),
                                     color = Color.Black
                                 )
                             }
@@ -247,6 +271,61 @@ fun PaymentScreen(
             }
         }
     }
+
+    if (showSheet.value) {
+        PaymentMethodBottomSheet(
+            paymentMethods = paymentViewModel.paymentMethodModel,
+            selectedKey = selectedPayment.value?.id,
+            onSelected = {
+                selectedPayment.value = it
+                showSheet.value = false
+            },
+            onDismiss = {
+                showSheet.value = false
+            }
+        )
+    }
+
+    DialogComponent(
+        open = paymentViewModel.isGetListPaymentMethodFailed,
+        onClose = {
+            paymentViewModel.onIsGetListPaymentMethodFailedChange(false)
+        },
+        title = "Metode Pembayaran",
+        description = paymentViewModel.errorMessage,
+        variant = DialogVariant.ERROR,
+        actions = listOf(
+            DialogAction(label = "Tutup", onClick = {
+                paymentViewModel.onIsGetListPaymentMethodFailedChange(false)
+            }),
+        )
+    )
+
+    DialogComponent(
+        open = paymentViewModel.isPaymentFailed,
+        onClose = {
+            paymentViewModel.onIsPaymentFailedChange(false)
+        },
+        title = "Pembayaran",
+        description = paymentViewModel.errorMessage,
+        variant = DialogVariant.ERROR,
+        actions = listOf(
+            DialogAction(label = "Tutup", onClick = {
+                paymentViewModel.onIsPaymentFailedChange(false)
+            }),
+        )
+    )
+
+    DialogComponent(
+        open = paymentViewModel.isPaymentSuccessful,
+        onClose = {
+            paymentViewModel.onIsPaymentSuccessfulChange(false)
+        },
+        title = "Pembayaran",
+        description = "Berhasil",
+        variant = DialogVariant.SUCCESS,
+    )
+
 }
 
 @Preview(showBackground = true)
@@ -254,7 +333,7 @@ fun PaymentScreen(
 private fun PaymentScreenPreview() {
     SmartParkingTheme {
         PaymentScreen(
-            navController = null,
+            navController = rememberNavController(),
             paymentViewModel = koinViewModel(),
         )
     }

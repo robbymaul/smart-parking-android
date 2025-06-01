@@ -1,5 +1,7 @@
 package com.dev.smartparking.domain.model
 
+import com.squareup.moshi.Json
+
 data class CreateBooking(
     val id: Int,
     val bookingReference: String
@@ -23,4 +25,17 @@ data class Booking(
     val discount: Int,
     val payment: String,
     val status: String
+)
+
+data class TicketBooking(
+    val id: Int,
+    val licencePlate: String,
+    val location: String,
+    val payment: String,
+    val slotNumber: String,
+    val startTime: String, // Bisa ubah ke java.time.LocalDateTime jika pakai converter
+    val endTime: String,
+    val status: String,
+    val type: String,
+    val vehicle: String,
 )

@@ -53,7 +53,7 @@ data class PlacesModel(
     val totalCapacity: Int,
     val isActive: Boolean,
     val createdAt: String,
-    val updatedAt: String,
+    val updatedAt: String?,
     val operatingHours: List<OperatingHourModel>? = null , // List of operating hours
     val tariffPlans: List<TariffPlanModel>? = null       // List of tariff plans
 )

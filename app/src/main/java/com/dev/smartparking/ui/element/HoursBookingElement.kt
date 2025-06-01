@@ -19,29 +19,36 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import com.dev.smartparking.data.utils.getHourDifference
 import com.dev.smartparking.ui.theme.SmartParkingTheme
 
 @Composable
 fun HoursBookingElement(
     modifier: Modifier = Modifier,
-    text: String
+    startTime: String,
+    endTime: String,
 ) {
+    val hours = getHourDifference(startTime, endTime)
+
     Box(
         modifier = modifier
+            .padding(4.dp)
             .shadow(
-                elevation = 8.dp,
-                shape = RoundedCornerShape(8.dp),
+                elevation = 4.dp,
+                shape = RoundedCornerShape(10.dp),
                 clip = false
             )
             .background(
-                color = Color.Gray.copy(alpha = 0.5f),
-                shape = RoundedCornerShape(8.dp)
+                color = Color.White,
+                shape = RoundedCornerShape(10.dp)
             )
             .border(
-                width = 2.dp,
-                color = Color.Transparent,
-                shape = RoundedCornerShape(8.dp)
+                width = 1.dp,
+                color = Color.LightGray,
+                shape = RoundedCornerShape(10.dp)
             )
+            .padding(8.dp) // Padding agar teks tidak mepet ke tepi
     ) {
         Canvas(modifier = Modifier.matchParentSize()) {
             val pathEffect = PathEffect.dashPathEffect(floatArrayOf(10f, 10f), 0f)
@@ -50,31 +57,33 @@ fun HoursBookingElement(
                 pathEffect = pathEffect
             )
             drawRoundRect(
-                color = Color.Blue,
+                color = Color(0xFF1976D2), // Biru Material
                 size = size,
-                cornerRadius = CornerRadius(8.dp.toPx(), 8.dp.toPx()),
+                cornerRadius = CornerRadius(10.dp.toPx(), 10.dp.toPx()),
                 style = stroke
             )
         }
+
         Text(
-            text = text,
+            text = "$hours Jam",
             style = TextStyle(
-                color = Color.Blue,
+                color = Color(0xFF1976D2),
                 fontWeight = FontWeight.Bold,
-                background = Color.Transparent
+                fontSize = 14.sp
             ),
             modifier = Modifier.align(Alignment.Center)
-                .padding(horizontal = 8.dp, vertical = 4.dp)
         )
     }
 }
+
 
 @Preview(showBackground = true)
 @Composable
 private fun HoursBookingElementPreview() {
     SmartParkingTheme {
         HoursBookingElement(
-            text = "2 Hours"
+            startTime = "",
+            endTime = ""
         )
     }
 }

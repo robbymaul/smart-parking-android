@@ -6,6 +6,7 @@ import com.dev.smartparking.data.model.request.ForgotPasswordRequest
 import com.dev.smartparking.data.model.request.ForgotPasswordVerifyOtpRequest
 import com.dev.smartparking.data.model.request.LoginRequest
 import com.dev.smartparking.data.model.request.LogoutRequest
+import com.dev.smartparking.data.model.request.PaymentRequest
 import com.dev.smartparking.data.model.request.RegisterRequest
 import com.dev.smartparking.data.model.request.ResetPasswordRequest
 import com.dev.smartparking.data.model.request.SendOTPRequest
@@ -21,12 +22,16 @@ import com.dev.smartparking.data.model.response.LoginResponse
 import com.dev.smartparking.data.model.response.LogoutResponse
 import com.dev.smartparking.data.model.response.ParkingSlotResponse
 import com.dev.smartparking.data.model.response.ParkingZoneResponse
+import com.dev.smartparking.data.model.response.PaymentMethodResponse
+import com.dev.smartparking.data.model.response.PaymentResponse
+import com.dev.smartparking.data.model.response.PaymentStatusResponse
 import com.dev.smartparking.data.model.response.PlacesRatingResponse
 import com.dev.smartparking.data.model.response.PlacesResponse
 import com.dev.smartparking.data.model.response.RegisterResponse
 import com.dev.smartparking.data.model.response.ResetPasswordResponse
 import com.dev.smartparking.data.model.response.ResponseData
 import com.dev.smartparking.data.model.response.SendOTPResponse
+import com.dev.smartparking.data.model.response.TicketBookingResponse
 import com.dev.smartparking.data.model.response.UpdatePasswordResponse
 import com.dev.smartparking.data.model.response.UserProfileResponse
 import com.dev.smartparking.data.model.response.UserResponse
@@ -101,5 +106,15 @@ interface ApiService {
     suspend fun createBooking(@Body createBookingRequest: CreateBookingRequest): Response<ResponseData<CreateBookingResponse>>
     @GET("bookings/{id}")
     suspend fun getBooking(@Path("id") bookingId: Int): Response<ResponseData<BookingResponse>>
+    @GET("tickets")
+    suspend fun getListTicketBooking(): Response<ResponseData<List<TicketBookingResponse>>>
+
+    // payment
+    @GET("payments/method")
+    suspend fun paymentMethod(): Response<ResponseData<List<PaymentMethodResponse>>>
+    @POST("payments/{id}")
+    suspend fun payment(@Path("id") bookingId: Int, paymentRequest: PaymentRequest): Response<ResponseData<PaymentResponse>>
+    @GET("payments/{id}/status")
+    suspend fun checkPayment(@Path("id") bookingId: Int): Response<ResponseData<PaymentStatusResponse>>
     // Tambahkan endpoint API lainnya sesuai kebutuhan
 }

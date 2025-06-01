@@ -29,3 +29,17 @@ data class BookingResponse(
     @Json(name = "payment") val payment: String,
     @Json(name = "status") val status: String
 )
+
+@JsonClass(generateAdapter = true)
+data class TicketBookingResponse(
+    @Json(name = "id") val id: Int,
+    @Json(name = "licencePlate") val licencePlate: String,
+    @Json(name = "location") val location: String,
+    @Json(name = "payment") val payment: String,
+    @Json(name = "slotNumber") val slotNumber: String,
+    @Json(name = "startTime") val startTime: String, // Bisa ubah ke java.time.LocalDateTime jika pakai converter
+    @Json(name = "endTime") val endTime: String,
+    @Json(name = "status") val status: String,
+    @Json(name = "type") val type: String,
+    @Json(name = "vehicle") val vehicle: String,
+)

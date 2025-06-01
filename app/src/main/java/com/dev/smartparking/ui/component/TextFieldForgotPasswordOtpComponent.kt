@@ -26,7 +26,7 @@ fun TextFieldForgotPasswordOtpComponent(modifier: Modifier = Modifier, forgotPas
     val otp3 = forgotPasswordViewModel.otp3
     val otp4 = forgotPasswordViewModel.otp4
     val otp5 = forgotPasswordViewModel.otp5
-    val otp6 = forgotPasswordViewModel.otp6
+//    val otp6 = forgotPasswordViewModel.otp6
     val pattern = remember { Regex("^\\d+$") }
     val focusManager = LocalFocusManager.current
 
@@ -36,7 +36,7 @@ fun TextFieldForgotPasswordOtpComponent(modifier: Modifier = Modifier, forgotPas
     val item3 = remember { FocusRequester() }
     val item4 = remember { FocusRequester() }
     val item5 = remember { FocusRequester() }
-    val item6 = remember { FocusRequester() }
+//    val item6 = remember { FocusRequester() }
 
     Row(
         modifier = modifier
@@ -95,7 +95,7 @@ fun TextFieldForgotPasswordOtpComponent(modifier: Modifier = Modifier, forgotPas
             modifier = Modifier
                 .focusRequester(item5)
                 .focusProperties {
-                    next = item6
+                    next = item5
                     previous = item4
                 },
             value = otp5,
@@ -103,17 +103,17 @@ fun TextFieldForgotPasswordOtpComponent(modifier: Modifier = Modifier, forgotPas
             focusManager = focusManager,
             onBackspaceEmpty = { item4.requestFocus() }
         )
-        TextFieldOtpElement(
-            modifier = Modifier
-                .focusRequester(item6)
-                .focusProperties {
-                    previous = item5
-                },
-            value = otp6,
-            onValueChange = { if (it.isEmpty() || it.matches(pattern)) forgotPasswordViewModel.otp6Change(it) },
-            focusManager = focusManager,
-            onBackspaceEmpty = { item5.requestFocus() }
-        )
+//        TextFieldOtpElement(
+//            modifier = Modifier
+//                .focusRequester(item6)
+//                .focusProperties {
+//                    previous = item5
+//                },
+//            value = otp6,
+//            onValueChange = { if (it.isEmpty() || it.matches(pattern)) forgotPasswordViewModel.otp6Change(it) },
+//            focusManager = focusManager,
+//            onBackspaceEmpty = { item5.requestFocus() }
+//        )
     }
 }
 

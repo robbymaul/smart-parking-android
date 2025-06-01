@@ -6,6 +6,7 @@ import com.dev.smartparking.data.utils.Result
 import com.dev.smartparking.domain.model.Booking
 import com.dev.smartparking.domain.model.CreateBooking
 import com.dev.smartparking.domain.model.LoginUser
+import com.dev.smartparking.domain.model.TicketBooking
 
 class BookingUseCase(private val bookingRepository: BookingRepository) {
     suspend fun createBooking(
@@ -71,6 +72,34 @@ class BookingUseCase(private val bookingRepository: BookingRepository) {
                         payment = bookingData.payment,
                         status = bookingData.status
                     )
+                )
+            }
+
+            is Result.Error -> Result.Error(result.exception)
+            Result.Loading -> Result.Loading
+        }
+    }
+
+    suspend fun getListTicketBooking(): Result<List<TicketBooking>> {
+        return when (val result = bookingRepository.getListTicketBooking()) {
+            is Result.Success -> {
+                val ticketBookingData = result.data.data
+                val ticketBookings = ticketBookingData.map {
+                    TicketBooking(
+                        id = it.id,
+                        licencePlate = it.licencePlate,
+                        location = it.location,
+                        payment = it.payment,
+                        slotNumber = it.slotNumber,
+                        startTime = it.startTime,
+                        endTime = it.endTime,
+                        status = it.status,
+                        type = it.type,
+                        vehicle = it.vehicle,
+                    )
+                }
+                Result.Success(
+                    ticketBookings
                 )
             }
 

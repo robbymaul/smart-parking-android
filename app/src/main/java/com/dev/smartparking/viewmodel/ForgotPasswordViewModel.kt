@@ -31,8 +31,8 @@ class ForgotPasswordViewModel(private val authUseCase: AuthUseCase) : ViewModel(
     var otp5 by mutableStateOf("")
         private set
 
-    var otp6 by mutableStateOf("")
-        private set
+//    var otp6 by mutableStateOf("")
+//        private set
 
     var password by mutableStateOf("")
         private set
@@ -103,9 +103,9 @@ class ForgotPasswordViewModel(private val authUseCase: AuthUseCase) : ViewModel(
         otp5 = value
     }
 
-    fun otp6Change(value: String) {
-        otp6 = value
-    }
+//    fun otp6Change(value: String) {
+//        otp6 = value
+//    }
 
     fun onPasswordChange(value: String) {
         password = value
@@ -190,11 +190,11 @@ class ForgotPasswordViewModel(private val authUseCase: AuthUseCase) : ViewModel(
             return false
         }
 
-        if (otp6.isBlank()) {
-            errorMessage = "otp tidak valid"
-            isForgotPasswordVerifyOtpFailed = true
-            return false
-        }
+//        if (otp6.isBlank()) {
+//            errorMessage = "otp tidak valid"
+//            isForgotPasswordVerifyOtpFailed = true
+//            return false
+//        }
 
         return true
     }
@@ -286,7 +286,7 @@ class ForgotPasswordViewModel(private val authUseCase: AuthUseCase) : ViewModel(
 
                 val result = authUseCase.forgotPasswordVerifyOtp(
                     phoneNumber = forgotPasswordModel?.phoneNumber ?: "",
-                    otp = otp1.plus(otp2.plus(otp3.plus(otp4.plus(otp5.plus(otp6)))))
+                    otp = otp1.plus(otp2.plus(otp3.plus(otp4.plus(otp5))))
                 )
 
                 isLoading = result.isLoading()
@@ -361,7 +361,7 @@ class ForgotPasswordViewModel(private val authUseCase: AuthUseCase) : ViewModel(
         otp3 = ""
         otp4 = ""
         otp5 = ""
-        otp6 = ""
+//        otp6 = ""
         password = ""
         confirmPassword = ""
         errorMessage = null

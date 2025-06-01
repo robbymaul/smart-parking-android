@@ -11,6 +11,7 @@
     <string name="txt_button_verify_otp">Verifikasi</string>
     <string name="txt_button_get_started">Mulai</string>
     <string name="txt_button_submit">Kirim</string>
+    <string name="txt_button_payment">Bayar</string>
 
     <!-- JUDUL TEKS -->
     <string name="txt_title_field_phone_number1">Nomor Telepon</string>
@@ -90,4 +91,8 @@
     <string name="txt_place_holder_form_name">Nama Lengkap</string>
     <string name="txt_place_holder_vehicle_number">Nomor Kendaraan</string>
     <string name="txt_place_holder_vehicle_type">Tipe</string>
+
+    <!--  TEXT APP BAR  -->
+    <string name="txt_app_bar_forgot_password">Lupa Password</string>
+    <string name="txt_app_bar_forgot_ticket">Tiket</string>
 </resources>

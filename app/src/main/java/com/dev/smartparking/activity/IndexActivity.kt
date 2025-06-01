@@ -26,6 +26,7 @@ import com.dev.smartparking.ui.screen.TicketScreen
 import com.dev.smartparking.viewmodel.HomepageViewModel
 import com.dev.smartparking.viewmodel.IndexViewModel
 import com.dev.smartparking.viewmodel.ProfileViewModel
+import com.dev.smartparking.viewmodel.TicketViewModel
 import kotlinx.coroutines.flow.first
 import org.koin.androidx.compose.koinViewModel
 import org.koin.compose.koinInject
@@ -39,6 +40,7 @@ fun IndexActivity(modifier: Modifier = Modifier, navController: NavHostControlle
     val currentRout = navBackStackEntry?.destination?.route
     val authPreferences: AuthPreferences = koinInject()
     val profileViewModel: ProfileViewModel = koinViewModel()
+    val ticketViewModel: TicketViewModel = koinViewModel()
 
 
     LaunchedEffect(Unit) {
@@ -57,7 +59,7 @@ fun IndexActivity(modifier: Modifier = Modifier, navController: NavHostControlle
 
     Scaffold(
         modifier = modifier,
-        topBar = { TopBarSwitcher(currentRout) },
+        topBar = { TopBarSwitcher(route = currentRout, bottomNavController = bottomNavController) },
         bottomBar = {
             BottomNavigationBar(bottomNavController)
         }
@@ -76,7 +78,9 @@ fun IndexActivity(modifier: Modifier = Modifier, navController: NavHostControlle
             }
             composable(Screen.Ticket.route) {
                 TicketScreen(
-                    navController = bottomNavController
+                    bottomNavController = bottomNavController,
+                    ticketViewModel = ticketViewModel,
+                    mainNavController = navController
                 )
             }
             composable(Screen.Notification.route) {

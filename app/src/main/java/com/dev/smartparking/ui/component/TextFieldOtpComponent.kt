@@ -26,7 +26,7 @@ fun TextFieldOtpComponent(modifier: Modifier = Modifier, otpViewModel: OTPViewMo
     val otp3 = otpViewModel.otp3
     val otp4 = otpViewModel.otp4
     val otp5 = otpViewModel.otp5
-    val otp6 = otpViewModel.otp6
+//    val otp6 = otpViewModel.otp6
     val pattern = remember { Regex("^\\d+$") }
     val focusManager = LocalFocusManager.current
 
@@ -36,7 +36,7 @@ fun TextFieldOtpComponent(modifier: Modifier = Modifier, otpViewModel: OTPViewMo
     val item3 = remember { FocusRequester() }
     val item4 = remember { FocusRequester() }
     val item5 = remember { FocusRequester() }
-    val item6 = remember { FocusRequester() }
+//    val item6 = remember { FocusRequester() }
 
     Row(
         modifier = modifier
@@ -95,7 +95,7 @@ fun TextFieldOtpComponent(modifier: Modifier = Modifier, otpViewModel: OTPViewMo
             modifier = Modifier
                 .focusRequester(item5)
                 .focusProperties {
-                    next = item6
+//                    next = item6
                     previous = item4
                 },
             value = otp5,
@@ -103,17 +103,17 @@ fun TextFieldOtpComponent(modifier: Modifier = Modifier, otpViewModel: OTPViewMo
             focusManager = focusManager,
             onBackspaceEmpty = { item4.requestFocus() }
         )
-        TextFieldOtpElement(
-            modifier = Modifier
-                .focusRequester(item6)
-                .focusProperties {
-                    previous = item5
-                },
-            value = otp6,
-            onValueChange = { if (it.isEmpty() || it.matches(pattern)) otpViewModel.otp6Change(it) },
-            focusManager = focusManager,
-            onBackspaceEmpty = { item5.requestFocus() }
-        )
+//        TextFieldOtpElement(
+//            modifier = Modifier
+//                .focusRequester(item6)
+//                .focusProperties {
+//                    previous = item5
+//                },
+//            value = otp6,
+//            onValueChange = { if (it.isEmpty() || it.matches(pattern)) otpViewModel.otp6Change(it) },
+//            focusManager = focusManager,
+//            onBackspaceEmpty = { item5.requestFocus() }
+//        )
     }
 }
 

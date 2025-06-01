@@ -7,6 +7,10 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
@@ -48,7 +52,14 @@ fun DetailMallScreen(
         topBar = {
             TopBarComponent(
                 title = detailMallViewModel.detailPlaceModel?.name ?: "",
-                onClickIcon = {}
+                onClickIcon = {},
+                navigationIcon = {
+                    IconButton(onClick = {
+                        navController.popBackStack()
+                    }) {
+                        Icon(imageVector = Icons.AutoMirrored.Default.ArrowBack, contentDescription = "")
+                    }
+                }
             )
         }
     ) { innerPadding ->
@@ -71,7 +82,7 @@ fun DetailMallScreen(
                         )
                     }
 
-                    if (!detailMallViewModel.isClosedToday) {
+                    if (!detailMallViewModel.isClosedToday && detailMallViewModel.todayTariffRates.isNotEmpty() ) {
                         ButtonComponent(
                             text = txt_button_book_now,
                             textColor = MaterialTheme.colorScheme.background,

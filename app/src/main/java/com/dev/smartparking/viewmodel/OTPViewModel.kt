@@ -28,8 +28,8 @@ class OTPViewModel(private val authUseCase: AuthUseCase): ViewModel() {
     var otp5 by  mutableStateOf("")
       private set
 
-    var otp6 by  mutableStateOf("")
-      private set
+//    var otp6 by  mutableStateOf("")
+//      private set
 
     // UI States
     var isLoading by mutableStateOf(false)
@@ -84,9 +84,9 @@ class OTPViewModel(private val authUseCase: AuthUseCase): ViewModel() {
         otp5 = value
     }
 
-    fun otp6Change(value: String) {
-        otp6 = value
-    }
+//    fun otp6Change(value: String) {
+//        otp6 = value
+//    }
 
     fun isLoadingChange(value: Boolean) {
         isLoading = value
@@ -159,11 +159,11 @@ class OTPViewModel(private val authUseCase: AuthUseCase): ViewModel() {
             return false
         }
 
-        if (otp6.isBlank()) {
-            errorMessage = "otp tidak valid"
-            isVerifyOTPFailed = true
-            return false
-        }
+//        if (otp6.isBlank()) {
+//            errorMessage = "otp tidak valid"
+//            isVerifyOTPFailed = true
+//            return false
+//        }
 
         return true
     }
@@ -234,7 +234,7 @@ class OTPViewModel(private val authUseCase: AuthUseCase): ViewModel() {
                 isLoading = true
                 errorMessage = null
 
-                val otp = otp1.plus(otp2.plus(otp3.plus(otp4.plus(otp5.plus(otp6)))))
+                val otp = otp1.plus(otp2.plus(otp3.plus(otp4.plus(otp5))))
 
                 val result = authUseCase.verifyOtp(otp)
 
@@ -267,7 +267,7 @@ class OTPViewModel(private val authUseCase: AuthUseCase): ViewModel() {
         otp3 = ""
         otp4 = ""
         otp5 = ""
-        otp6 = ""
+//        otp6 = ""
 
         isLoading = false
         errorMessage = null

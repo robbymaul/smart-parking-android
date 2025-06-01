@@ -14,7 +14,7 @@ import org.koin.androidx.compose.koinViewModel
 fun HomepageActivity(modifier: Modifier = Modifier) {
     Scaffold (
         modifier = modifier.fillMaxSize(),
-        topBar = { TopBarMenuHomepageComponent() }
+        topBar = { TopBarMenuHomepageComponent(navController = rememberNavController()) }
     ) { innerPadding ->
        HomepageScreen(
            modifier = Modifier.padding(innerPadding),

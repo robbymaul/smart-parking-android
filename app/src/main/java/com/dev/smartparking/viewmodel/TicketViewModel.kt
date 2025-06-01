@@ -7,12 +7,16 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.dev.smartparking.domain.model.Booking
+import com.dev.smartparking.domain.model.TicketBooking
 import com.dev.smartparking.domain.usecase.BookingUseCase
 import kotlinx.coroutines.launch
 
-class DetailTicketViewModel(private val bookingUseCase: BookingUseCase): ViewModel() {
+class TicketViewModel(private val bookingUseCase: BookingUseCase): ViewModel() {
     // State
     var bookingModel by mutableStateOf<Booking?>(null)
+        private set
+
+    var ticketBookingModel by mutableStateOf<List<TicketBooking>>(listOf())
         private set
 
     var errorMessage by mutableStateOf("")
@@ -57,6 +61,39 @@ class DetailTicketViewModel(private val bookingUseCase: BookingUseCase): ViewMod
                 }
 
                 Log.d("booking", "$bookingModel")
+
+                if (isGetBookingFailed) {
+                    onFailed()
+                }
+            } catch (e: Exception) {
+                isGetBookingFailed = true
+                errorMessage = e.message ?: "Terjadi kesahalan pada sistem"
+                if (isGetBookingFailed) {
+                    onFailed()
+                }
+            } finally {
+                isLoading = false
+            }
+        }
+    }
+
+    fun getListTicketBooking(onFailed: () -> Unit) {
+        viewModelScope.launch {
+            try {
+                isLoading = true
+
+                val result = bookingUseCase.getListTicketBooking()
+
+                isLoading = result.isLoading()
+
+                result.getOrNull()?.let { ticketBooking ->
+                    Log.d("ticket booking data", "$ticketBookingModel")
+                    ticketBookingModel = ticketBooking
+                } ?: run {
+                    errorMessage =
+                        result.exceptionOrNull()?.message ?: "Terjadi Kesalahan saat login"
+                    isGetBookingFailed = true
+                }
 
                 if (isGetBookingFailed) {
                     onFailed()

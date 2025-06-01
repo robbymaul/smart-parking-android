@@ -1,13 +1,12 @@
 package com.dev.smartparking.di
 
-import com.dev.smartparking.activity.PaymentActivity
 import com.dev.smartparking.data.local.datastore.AuthPreferences
 import com.dev.smartparking.domain.usecase.AuthUseCase
 import com.dev.smartparking.domain.usecase.BookingUseCase
+import com.dev.smartparking.domain.usecase.PaymentUseCase
 import com.dev.smartparking.domain.usecase.PlacesUseCase
 import com.dev.smartparking.domain.usecase.UserUseCase
 import com.dev.smartparking.viewmodel.DetailMallViewModel
-import com.dev.smartparking.viewmodel.DetailTicketViewModel
 import com.dev.smartparking.viewmodel.ForgotPasswordViewModel
 import com.dev.smartparking.viewmodel.HomepageViewModel
 import com.dev.smartparking.viewmodel.IndexViewModel
@@ -19,6 +18,7 @@ import com.dev.smartparking.viewmodel.PaymentViewModel
 import com.dev.smartparking.viewmodel.ProfileViewModel
 import com.dev.smartparking.viewmodel.RegisterViewModel
 import com.dev.smartparking.viewmodel.STNKActivationViewModel
+import com.dev.smartparking.viewmodel.TicketViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -38,6 +38,7 @@ val appModule = module {
         PlacesUseCase(get())
     }
     factory { BookingUseCase(get()) }
+    factory { PaymentUseCase(get()) }
 
     // ViewModels
     viewModel { RegisterViewModel(get()) }
@@ -51,6 +52,6 @@ val appModule = module {
     viewModel { DetailMallViewModel(get(), get())}
     viewModel {LocationViewModel(get())}
     viewModel {ParkingViewModel(get(), get(), get())}
-    viewModel { PaymentViewModel(get()) }
-    viewModel { DetailTicketViewModel(get())}
+    viewModel { PaymentViewModel(get(), get()) }
+    viewModel { TicketViewModel(get()) }
 }

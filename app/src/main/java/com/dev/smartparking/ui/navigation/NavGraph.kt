@@ -10,6 +10,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.dev.smartparking.activity.ActivationActivity
 import com.dev.smartparking.activity.AuthForgotPasswordActivity
+import com.dev.smartparking.activity.CheckStatusPaymentActivity
 import com.dev.smartparking.activity.HomepageActivity
 import com.dev.smartparking.activity.IndexActivity
 import com.dev.smartparking.activity.IntroActivity
@@ -126,10 +127,40 @@ fun NavGraph(
             )
         }
 
-        composable(Screen.DetailTicket.route) {
+        composable(
+            route = "${Screen.Payment.route}/{bookingId}",
+            arguments = listOf(
+                navArgument("bookingId") {type = NavType.IntType}
+            )
+        ) { backStackEntry ->
+            val bookingId = backStackEntry.arguments?.getInt("bookingId") ?: return@composable
+            PaymentActivity(
+                navController = navController, bookingId = bookingId
+            )
+        }
+
+        composable(
+            route = "${Screen.CheckStatusPayment.route}/{bookingId}",
+            arguments = listOf(
+                navArgument("bookingId") {type = NavType.IntType}
+            )
+        ) { backStackEntry ->
+            val bookingId = backStackEntry.arguments?.getInt("bookingId") ?: return@composable
+            CheckStatusPaymentActivity(
+                navController = navController, bookingId = bookingId
+            )
+        }
+
+        composable(
+            route = "${Screen.DetailTicket.route}/{bookingId}",
+            arguments = listOf(
+                navArgument("bookingId") {type = NavType.IntType}
+            )
+        ) { backStackEntry ->
+            val bookingId = backStackEntry.arguments?.getInt("bookingId") ?: return@composable
             DetailTicketScreen(
                 navController = navController,
-                bookingId = 26
+                bookingId = bookingId
             )
         }
 

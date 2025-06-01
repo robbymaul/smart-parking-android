@@ -14,7 +14,7 @@ import androidx.compose.ui.unit.dp
 import com.dev.smartparking.ui.theme.SmartParkingTheme
 
 @Composable
-fun StatusTicketElement(modifier: Modifier = Modifier) {
+fun StatusTicketElement(modifier: Modifier = Modifier, status: String, payment: String) {
     Box(
         modifier = modifier
             .background(
@@ -28,7 +28,7 @@ fun StatusTicketElement(modifier: Modifier = Modifier) {
 
     ) {
         Text(
-            text = "On Going",
+            text = status,
             style = TextStyle(
                 color = Color.White
             ),
@@ -40,6 +40,6 @@ fun StatusTicketElement(modifier: Modifier = Modifier) {
 @Composable
 private fun StatusTicketPreview() {
     SmartParkingTheme {
-        StatusTicketElement()
+        StatusTicketElement(status = "", payment = "")
     }
 }

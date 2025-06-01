@@ -18,7 +18,7 @@ data class PlacesResponse(
     @Json(name = "totalCapacity") val totalCapacity: Int,
     @Json(name = "isActive") val isActive: Boolean,
     @Json(name = "createdAt") val createdAt: String,
-    @Json(name = "updatedAt") val updatedAt: String,
+    @Json(name = "updatedAt") val updatedAt: String?,
     @Json(name = "operatingHour") val operatingHour: List<OperatingHour>? = null,
     @Json(name = "tariffPlan") val tariffPlan: List<TariffPlan>? = null
 )

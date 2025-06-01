@@ -9,6 +9,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
+import com.dev.smartparking.data.utils.extractTimeOnly
 import com.dev.smartparking.ui.theme.SmartParkingTheme
 import org.w3c.dom.Text
 
@@ -18,11 +19,13 @@ fun TimeBookingElement(
     startTime: String,
     endTime: String,
 ) {
+    val start = extractTimeOnly(startTime)
+    val end = extractTimeOnly(endTime)
     Box(
         modifier = modifier,
     ) {
         Text(
-            text = "$startTime - $endTime",
+            text = "$start - $end",
             style = TextStyle(
                 color = Color.Black,
                 fontWeight = FontWeight.Bold,

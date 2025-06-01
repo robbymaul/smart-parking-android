@@ -9,10 +9,12 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.dev.smartparking.R
 import com.dev.smartparking.route.Screen
 import com.dev.smartparking.ui.component.TopBarComponent
 import com.dev.smartparking.ui.screen.ForgotPasswordOtpScreen
@@ -41,7 +43,8 @@ fun AuthForgotPasswordActivity(modifier: Modifier = Modifier, navController: Nav
                         tint = Color.White
                     )
                 }
-            }
+            },
+            title = stringResource(R.string.txt_app_bar_forgot_password)
         ) },
     ) { innerPadding ->
         NavHost(

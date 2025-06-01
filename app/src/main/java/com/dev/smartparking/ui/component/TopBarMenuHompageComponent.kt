@@ -7,11 +7,9 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.LocationOn
@@ -29,12 +27,15 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.dev.smartparking.R
+import com.dev.smartparking.route.Screen
 import com.dev.smartparking.ui.theme.SmartParkingTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TopBarMenuHomepageComponent(modifier: Modifier = Modifier) {
+fun TopBarMenuHomepageComponent(modifier: Modifier = Modifier, navController: NavController) {
     TopAppBar(
         modifier = modifier
             .fillMaxWidth()
@@ -64,7 +65,7 @@ fun TopBarMenuHomepageComponent(modifier: Modifier = Modifier) {
                 modifier = Modifier.fillMaxHeight().padding(end = 16.dp),
                 contentAlignment = Alignment.Center
             ) {
-                IconButton(onClick = { /* TODO: Add action */ }) {
+                IconButton(onClick = { navController.navigate(Screen.DetailProfile.route) }) {
                     Image(
                         painter = painterResource(id = R.drawable.image_default_avatar1),
                         contentDescription = "Profile",
@@ -81,6 +82,6 @@ fun TopBarMenuHomepageComponent(modifier: Modifier = Modifier) {
 @Composable
 private fun TopBarMenuHomepageComponentPreview() {
     SmartParkingTheme {
-        TopBarMenuHomepageComponent()
+        TopBarMenuHomepageComponent(navController = rememberNavController())
     }
 }
